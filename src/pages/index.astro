@@ -5,6 +5,13 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Stats from "../components/Stats";
 import AcademicLevels from "../components/AcademicLevels";
+import Schedules from "../components/Schedules";
+import Subjects from "../components/Subjects";
+import Enrollment from "../components/Enrollment";
+import Gallery from "../components/Gallery";
+import Testimonials from "../components/Testimonials";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 ---
 
 <Layout>
@@ -18,17 +25,17 @@ import AcademicLevels from "../components/AcademicLevels";
 
   <AcademicLevels client:visible />
 
-  <!-- SECCIÓN: Schedules -->
+  <Schedules client:visible />
 
-  <!-- SECCIÓN: Subjects -->
+  <Subjects client:visible />
 
-  <!-- SECCIÓN: Enrollment -->
+  <Enrollment client:visible />
 
-  <!-- SECCIÓN: Gallery -->
+  <Gallery client:visible />
 
-  <!-- SECCIÓN: Testimonials -->
+  <Testimonials client:visible />
 
-  <!-- SECCIÓN: Contact -->
+  <Contact client:visible />
 
-  <!-- SECCIÓN: Footer -->
+  <Footer />
 </Layout>
