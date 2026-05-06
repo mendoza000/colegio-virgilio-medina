@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import About from "../components/About";
+import Stats from "../components/Stats";
+import AcademicLevels from "../components/AcademicLevels";
 ---
 
 <Layout>
@@ -9,11 +12,11 @@ import Hero from "../components/Hero";
 
   <Hero client:load />
 
-  <!-- SECCIÓN: About -->
+  <About client:visible />
 
-  <!-- SECCIÓN: Stats -->
+  <Stats client:visible />
 
-  <!-- SECCIÓN: AcademicLevels -->
+  <AcademicLevels client:visible />
 
   <!-- SECCIÓN: Schedules -->
 

@@ -98,14 +98,15 @@ Duraciones entre `0.4s` y `0.8s`, ease `easeOut`. Nunca exageradas.
 ## Datos del colegio (ficticios)
 
 ```
-Nombre:     Institución Educativa San Isidro
-Siglas:     I.E.S.I.
+Nombre:     Colegio Virgilio Medina
+Siglas:     C.V.M.
 Lema:       "Formando líderes con valores para el mundo"
-Dirección:  Carrera 15 #42-30, Barrio El Prado
-Teléfonos:  (601) 234-5678 | 310 987 6543
-Email:      info@iesanisidro.edu.co
+Dirección:  Avenida Bolívar, Sector Centro, Santa Ana del Táchira, Edo. Táchira
+Teléfonos:  (0276) 555-3478 | 0414 555 8290
+Email:      info@colegiovirgiliomedina.edu.ve
 Secretaría: Lunes a Viernes, 7:00am – 4:00pm
-Fundación:  1985
+Fundación:  2020
+País:       Venezuela
 ```
 
 ---
@@ -165,7 +166,7 @@ lucide-react
 - Usar `client:visible` en todos los componentes React dentro de Astro — excepción: `Navbar` usa `client:load`
 - Imágenes placeholder: `https://picsum.photos/seed/{seed}/{width}/{height}`
 - No hay formularios funcionales — los botones de inscripción son `<a href="#">` decorativos
-- Todo el texto debe sonar institucional y profesional en **español colombiano**
+- Todo el texto debe sonar institucional y profesional en **español venezolano**
 - Mobile-first con breakpoints `sm / md / lg / xl` de Tailwind
 - Confirmar que el proyecto compila sin errores al final de cada fase antes de continuar
 
@@ -246,40 +247,64 @@ Proyecto en `localhost:4321`, fondo `#F9F6F0`, fuentes cargadas, sin errores en 
 ## Tareas
 
 ### 2.1 `Navbar.tsx` — `client:load`
-- Logo (`/images/logo.png`, 40px alto) + nombre en `Cormorant Garamond` a la izquierda
-- Links de navegación: Inicio · Nosotros · Niveles · Horarios · Inscripción · Galería · Contacto
-- Al hacer scroll: añadir fondo `#0F0F0E` + `backdrop-blur-md` + borde inferior dorado sutil
-- Menú hamburguesa en mobile con animación de apertura (`x` transform)
-- **Animación de entrada:** `y: -80 → 0` + `opacity: 0 → 1` al montar (duración 0.5s)
+
+Header de **dos pisos** con identidad institucional al estilo de un sitio universitario.
+
+**Piso superior — barra utilitaria** (`hidden md:block`, oculta en mobile):
+- Fondo translúcido sobre `bg-carbon`, `text-xs text-bone/70`, alto `h-10`.
+- Izquierda: ícono `Mail` + email enlazado · ícono `MapPin` + "Santa Ana del Táchira, Venezuela".
+- Derecha: íconos sociales (`Facebook`, `Instagram`, `Youtube` de `lucide-react`) + pill outline dorada con ícono `Phone` y texto "Contáctanos".
+- Al hacer scroll (`scrollY > 24`): la barra colapsa con transición de `max-h` (sin saltos visuales).
+
+**Piso inferior — barra principal** (siempre visible, `h-20`):
+- **Brand (izq):** logo cuadrado dentro de un wrapper `bg-carbon` + nombre completo "Colegio Virgilio Medina" en `Cormorant Garamond`. En mobile (`<md`) el nombre se contrae a "C.V.M.".
+  - Mientras no exista `/images/logo.png` se usa un placeholder externo: `https://placehold.co/120x120/0F0F0E/C9920A/png?text=CVM&font=playfair` (carbon + dorado, monograma "CVM").
+- **Nav central (lg+):** links absolutamente centrados (`absolute left-1/2 -translate-x-1/2`) — Inicio · Nosotros · Niveles · Horarios · Inscripción · Galería · Contacto. Color `text-bone/85 hover:text-gold`.
+- **Acción derecha:** botón pill dorado "Inscríbete" (`bg-gold text-carbon`, uppercase, tracking ancho) visible desde `md:`. En mobile, hamburguesa `Menu` (toggle del panel lateral).
+
+**Comportamiento de scroll:**
+- `scrolled === false`: header transparente, barra utilitaria visible.
+- `scrolled === true`: `bg-carbon/95 + backdrop-blur-md + border-b dorado sutil + sombra`. Barra utilitaria colapsa.
+
+**Menú mobile (`AnimatePresence`):**
+- Overlay `bg-carbon/70 + backdrop-blur-sm` + panel deslizante desde la derecha (`x: 100% → 0`, `duration: 0.3`).
+- Panel `w-80 bg-carbon` con: header (logo C.V.M. + botón cerrar `X`), nav vertical en `font-display text-2xl`, CTA "Inscríbete" pill dorada, footer con email + redes sociales.
+- Bloqueo de scroll del body mientras el menú esté abierto.
+
+**Animación de entrada:** `motion.header` con `y: -80 → 0` + `opacity: 0 → 1`, `duration: 0.5s`, `ease: easeOut`.
 
 ### 2.2 `Hero.tsx` — `client:load`
-Fondo: `#0F0F0E`. Layout dos columnas en desktop, apilado en mobile.
 
-**Columna izquierda (texto):**
-- Badge dorado: "Desde 1985 · Educación con propósito"
-- Título en `Cormorant Garamond` (~5rem desktop): *"Educación con propósito, valores con carácter"*
-- Subtítulo en `DM Sans`: breve descripción del colegio
-- Lema en cursiva dorada: *"Formando líderes con valores para el mundo"*
-- CTA primary: "Conocer el colegio" + CTA outline: "Proceso de inscripción"
+**Hero a pantalla completa estilo "campus inmersivo":** una sola sección con foto institucional de fondo, gradiente oscuro y contenido alineado a la izquierda.
 
-**Columna derecha (imagen):**
-- Imagen `picsum.photos/seed/school/800/600` con borde dorado y sombra dorada
-- Badge flotante superpuesto: "+850 estudiantes"
+**Estructura:**
+- `<section>` con `min-h-[92vh]`, `bg-carbon`, `pt-32 pb-24 lg:pt-40 lg:pb-32`, `overflow-hidden`, `isolate`.
+- **Capa 1 — imagen de fondo:** `<img src="https://picsum.photos/seed/colegio-campus/1920/1200" alt="" aria-hidden />` `absolute inset-0 -z-10 h-full w-full object-cover opacity-55`.
+- **Capa 2 — gradiente lateral:** `bg-gradient-to-r from-carbon via-carbon/85 to-carbon/40` (lectura segura del texto sobre la izquierda).
+- **Capa 3 — gradiente inferior:** banda inferior `bg-gradient-to-t from-carbon to-transparent` para fundir con la sección siguiente.
+- **Contenido (max-w-3xl):**
+  1. Kicker dorado en mayúsculas `tracking-[0.32em]` precedido de una raya dorada de 40px: "Colegio Virgilio Medina · Desde 2020".
+  2. `<h1>` `font-display text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-bone`: *"Educación con propósito, / **valores con carácter**"* (segunda línea en `text-gold`).
+  3. Párrafo descriptivo `max-w-xl text-bone/75`.
+  4. Lema en `font-display italic text-gold text-xl md:text-2xl`.
+  5. Dos CTAs: `Button` primary "Conocer el colegio" + `Button` outline "Proceso de inscripción".
 
-**Animaciones (stagger secuencial al montar):**
-1. Badge → `fadeUp` delay 0s
-2. Título → `fadeUp` delay 0.1s
+**Stat flotante (lg+ solamente):**
+- Card absoluta en `right-6 bottom-10`, `bg-carbon-soft/90 + backdrop-blur + border border-gold/40`, con número `+850` en `font-display text-4xl text-gold` y etiqueta "Estudiantes activos".
+
+**Animaciones (al montar — sin `useInView`, ya está sobre el viewport):**
+1. Kicker → `fadeUp` delay 0s
+2. h1 → `fadeUp` delay 0.1s
 3. Subtítulo → `fadeUp` delay 0.2s
 4. Lema → `fadeUp` delay 0.3s
-5. CTAs → `fadeUp` delay 0.4s
-6. Imagen → `x: 60 → 0` + `opacity` delay 0.2s
-7. Badge flotante → `scale: 0.8 → 1` + `opacity` delay 0.5s
+5. CTAs (un único `motion.div`) → `fadeUp` delay 0.4s
+6. Stat flotante → `scale: 0.85 → 1` + `y: 20 → 0` + opacity, delay 0.7s
 
 ### 2.3 Integrar en `index.astro`
-Reemplazar comentarios de Navbar y Hero con los componentes reales.
+Reemplazar comentarios de Navbar y Hero con los componentes reales (`<Navbar client:load />` y `<Hero client:load />`).
 
 ## ✅ Entregable
-Navbar sticky con comportamiento scroll + Hero animado. Primera impresión del sitio completa.
+Navbar de dos pisos con barra utilitaria + main bar y comportamiento scroll. Hero a pantalla completa con foto + overlay + texto sobrepuesto y stat flotante. Primera impresión del sitio completa, en línea con la referencia institucional moderna.
 
 ---
 ---
@@ -306,7 +331,7 @@ Dos columnas:
 
 ### 3.2 `Stats.tsx` — `client:visible` — fondo oscuro `#0F0F0E`
 Cuatro stats en fila, separados por líneas doradas verticales:
-- **+39** Años de experiencia
+- **+6** Años formando estudiantes
 - **+850** Estudiantes activos
 - **+60** Docentes titulados
 - **12** Proyectos extracurriculares
@@ -314,22 +339,17 @@ Cuatro stats en fila, separados por líneas doradas verticales:
 Números en dorado `#C9920A`, etiqueta en blanco semitransparente. Cada número anima contando de 0 al valor real al entrar al viewport (`useMotionValue` + `animate`).
 
 ### 3.3 `AcademicLevels.tsx` — `client:visible` — fondo claro
-Tres tabs con indicador activo dorado:
+Dos tabs con indicador activo dorado (estructura del sistema educativo venezolano):
 
-**Primaria (1° a 5°)**
+**Primaria (1° a 6° grado)**
 - Enfoque en lectoescritura, pensamiento lógico y valores
 - Actividades: arte, música, deportes, lectura
 - 3 características: Grupos pequeños · Docentes especializados · Ambientes lúdicos
 
-**Secundaria Básica (6° a 9°)**
-- Profundización académica y habilidades sociales
-- Actividades: ciencias, teatro, robótica, deporte
-- 3 características: Laboratorios · Club de lectura · Orientación vocacional
-
-**Bachillerato (10° y 11°)**
-- Preparación universitaria y proyecto de vida
-- Actividades: emprendimiento, ICFES, servicio social
-- 3 características: Preuniversitario · Énfasis en ciencias · Proyecto de grado
+**Bachillerato (1° a 5° año)**
+- Profundización académica, formación científica y preparación universitaria
+- Actividades: laboratorios, club de lectura, orientación vocacional, emprendimiento
+- 3 características: Laboratorios y club de lectura · Orientación vocacional · Preuniversitario y proyecto de grado
 
 Cada tab: descripción, 3 características con íconos, imagen representativa placeholder.
 **Animación:** `fade + y` al cambiar de tab.
@@ -349,12 +369,11 @@ Tres secciones completas. El ritmo claro/oscuro/claro ya se percibe correctament
 ## Tareas
 
 ### 4.1 `Schedules.tsx` — `client:visible` — fondo oscuro `#1A1A18`
-Selector de nivel (Primaria / Secundaria / Bachillerato) en botones tipo tab.
+Selector de nivel (Primaria / Bachillerato) en botones tipo tab.
 
 | Nivel | Entrada | Salida | Recreo |
 |-------|---------|--------|--------|
 | Primaria | 7:00am | 12:30pm | 9:30am – 10:00am |
-| Secundaria | 6:45am | 1:15pm | 9:15am – 9:45am |
 | Bachillerato | 6:45am | 2:00pm | 9:15am – 9:45am |
 
 Mostrar también horario de atención de director de grupo.
@@ -363,11 +382,9 @@ Mostrar también horario de atención de director de grupo.
 ### 4.2 `Subjects.tsx` — `client:visible` — fondo claro `#F9F6F0`
 Selector de nivel que muestra grid de materias agrupadas por grado.
 
-**Primaria (1°–5°):** Matemáticas, Lengua Castellana, Ciencias Naturales, Ciencias Sociales, Inglés, Educación Física, Educación Artística, Ética y Valores, Tecnología e Informática, Religión
+**Primaria (1°–6° grado):** Matemática, Lengua y Literatura, Ciencias Naturales, Ciencias Sociales, Inglés, Educación Física, Educación Artística, Educación en Valores, Computación, Religión
 
-**Secundaria (6°–9°):** Matemáticas, Español, Ciencias Naturales, Química (8°–9°), Física (9°), Ciencias Sociales, Inglés, Ed. Física, Artística, Ética, Tecnología, Religión, Informática
-
-**Bachillerato (10°–11°):** Matemáticas, Español, Filosofía, Química, Física, Biología, Ciencias Sociales, Inglés, Ed. Física, Cátedra de Paz, Emprendimiento, Estadística, Tecnología
+**Bachillerato (1°–5° año):** Matemática, Castellano y Literatura, Inglés, Biología, Química, Física, Geografía, Historia de Venezuela, Historia Universal, Educación Física, Educación Artística, Premilitar (4°–5°), Computación, Formación para el Trabajo
 
 Cada grado: card con lista de materias. **Animación:** cards con stagger `fadeUp`.
 
@@ -445,9 +462,9 @@ Avatares circulares placeholder: `https://picsum.photos/seed/{nombre}/80/80`
 Dos columnas:
 
 **Izquierda — Info de contacto:**
-- `MapPin` — Carrera 15 #42-30, Barrio El Prado
-- `Phone` — (601) 234-5678 | 310 987 6543
-- `Mail` — info@iesanisidro.edu.co
+- `MapPin` — Avenida Bolívar, Sector Centro, Santa Ana del Táchira, Edo. Táchira
+- `Phone` — (0276) 555-3478 | 0414 555 8290
+- `Mail` — info@colegiovirgiliomedina.edu.ve
 - `Clock` — Lunes a Viernes, 7:00am – 4:00pm
 - Íconos de redes: Facebook, Instagram, YouTube (links `#`)
 
@@ -461,7 +478,7 @@ Dos columnas:
 - Logo pequeño + nombre del colegio en `Cormorant Garamond`
 - Links rápidos a todas las secciones (scroll suave con `href="#id"`)
 - Íconos de redes sociales
-- Copyright: `© 2025 Institución Educativa San Isidro. Todos los derechos reservados.`
+- Copyright: `© 2026 Colegio Virgilio Medina. Todos los derechos reservados.`
 
 ### 5.5 Integrar en `index.astro`
 Montar: `Gallery` → `Testimonials` → `Contact` → `Footer`. El sitio ya está completo.
