@@ -69,9 +69,11 @@ export function Footer() {
               <li className="flex items-start gap-3 text-bone/75">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
                 <span className="font-medium">
-                  Avenida Bolívar, Sector Centro,
+                  Calle 14 entre carreras 8 y 9, N° 8-05,
                   <br />
-                  Santa Ana del Táchira, Edo. Táchira
+                  Barrio Libertador, Santa Ana,
+                  <br />
+                  Mun. Córdoba, Edo. Táchira
                 </span>
               </li>
               <li>
@@ -107,6 +109,8 @@ export function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 text-bone/70 transition-colors hover:border-gold hover:text-gold"
               >
                 <Icon className="h-4 w-4" />

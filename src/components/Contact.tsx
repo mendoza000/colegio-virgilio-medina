@@ -16,8 +16,8 @@ const ITEMS: ContactItem[] = [
   {
     Icon: MapPin,
     label: "Dirección",
-    primary: "Avenida Bolívar, Sector Centro",
-    secondary: "Santa Ana del Táchira, Edo. Táchira",
+    primary: "Calle 14 entre carreras 8 y 9, N° 8-05",
+    secondary: "Barrio Libertador, Santa Ana, Mun. Córdoba, Edo. Táchira",
   },
   {
     Icon: Phone,
@@ -41,7 +41,7 @@ const ITEMS: ContactItem[] = [
 ];
 
 const MAP_SRC =
-  "https://www.openstreetmap.org/export/embed.html?bbox=-72.28%2C7.55%2C-72.25%2C7.58&layer=mapnik&marker=7.5667%2C-72.2667";
+  "https://www.openstreetmap.org/export/embed.html?bbox=-72.275%2C7.560%2C-72.260%2C7.575&layer=mapnik&marker=7.5670%2C-72.2670";
 
 export function Contact() {
   return (
@@ -112,6 +112,8 @@ export function Contact() {
                     key={label}
                     href={href}
                     aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 text-ink-muted transition-colors hover:border-gold hover:text-gold"
                   >
                     <Icon className="h-4 w-4" />

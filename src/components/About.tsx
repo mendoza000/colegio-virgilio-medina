@@ -44,7 +44,7 @@ const VALUES: Value[] = [
 export function About() {
   return (
     <section id="nosotros" className="bg-bone py-20 lg:py-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -89,24 +89,49 @@ export function About() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
             className="flex flex-col gap-5"
           >
-            <div>
+            <div className="flex flex-col gap-3">
               <p className="font-display text-xs uppercase tracking-[0.32em] text-gold">
                 Misión
               </p>
-              <p className="mt-2 text-base font-medium leading-relaxed text-ink/80">
-                Formamos estudiantes íntegros, autónomos y comprometidos con su entorno,
-                ofreciendo una educación de calidad desde primaria hasta bachillerato, basada
-                en valores y en la búsqueda permanente de la excelencia académica.
+              <p className="text-base font-medium leading-relaxed text-ink/80">
+                El Colegio Virgilio Medina Ramírez es una institución educativa privada, de
+                media general que, inspirada en la Pedagogía Ignaciana, busca respetar y
+                partir de los saberes previos de los estudiantes, reconociendo sus
+                experiencias vitales al sentir y experimentar el mundo. Considerado este
+                aspecto el punto de partida del proceso de enseñanza, se convierte en un
+                centro de integración, innovación y atracción, donde el colegio, la familia y
+                la comunidad impulsan con el educador una ética y una pedagogía del amor,
+                reflexiva y con profundo contenido social.
+              </p>
+              <p className="text-base font-medium leading-relaxed text-ink/80">
+                Potenciamos en el estudiante la puesta en práctica de procesos cognitivos que
+                lo lleven a aplicar «la razón, el corazón y las manos» en procura del perfil
+                de egreso: <em className="not-italic font-semibold text-ink">«hombres y
+                mujeres para los demás»</em>. Para ello, sumergimos al docente en una
+                permanente capacitación que aplica una nueva metodología educativa
+                transformadora, en armonía con las dimensiones del ser, hacer, conocer y
+                convivir, en coherencia con su entorno social y familiar, en el marco de la
+                idiosincrasia cordobense y santanense.
               </p>
             </div>
-            <div>
+            <div className="flex flex-col gap-3">
               <p className="font-display text-xs uppercase tracking-[0.32em] text-gold">
                 Visión
               </p>
-              <p className="mt-2 text-base font-medium leading-relaxed text-ink/80">
-                Ser un referente educativo en el estado Táchira, reconocido por la formación
-                humana de sus egresados, la solidez de su propuesta académica y el compromiso
-                de su comunidad con el desarrollo de Venezuela.
+              <p className="text-base font-medium leading-relaxed text-ink/80">
+                El Colegio Virgilio Medina se visualiza como una institución educativa
+                responsable y eficiente, con alto concepto en la calidad de los procesos de
+                enseñanza en el marco del modelo pedagógico que aplica, el cual busca formar
+                estudiantes integrales, con alto conocimiento de sí mismos y manifiestas
+                habilidades cognitivas y procedimentales.
+              </p>
+              <p className="text-base font-medium leading-relaxed text-ink/80">
+                Buscamos colaborar con el papel que como ciudadano debe cumplir cada
+                estudiante, en beneficio propio y del colectivo. De tal forma, nos
+                convertimos en un referente educativo desde un enfoque distinto y propio, que
+                colabora con la ejecución de los planes locales, regionales y nacionales, los
+                cuales tienen como objetivo estratégico el desarrollo de la patria,
+                Venezuela.
               </p>
             </div>
           </motion.div>

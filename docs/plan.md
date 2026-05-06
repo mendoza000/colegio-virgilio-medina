@@ -98,12 +98,15 @@ Duraciones entre `0.4s` y `0.8s`, ease `easeOut`. Nunca exageradas.
 ## Datos del colegio (ficticios)
 
 ```
-Nombre:     Colegio Virgilio Medina
+Nombre:     Colegio Virgilio Medina (razón social: Colegio Virgilio Medina Ramírez)
 Siglas:     C.V.M.
 Lema:       "Formando líderes con valores para el mundo"
-Dirección:  Avenida Bolívar, Sector Centro, Santa Ana del Táchira, Edo. Táchira
+Dirección:  Calle 14 entre carreras 8 y 9, N° 8-05,
+            Barrio Libertador, Santa Ana,
+            Municipio Córdoba, Estado Táchira
 Teléfonos:  (0276) 555-3478 | 0414 555 8290
 Email:      info@colegiovirgiliomedina.edu.ve
+TikTok:     https://www.tiktok.com/@u.e.colegio.virgi
 Secretaría: Lunes a Viernes, 7:00am – 4:00pm
 Fundación:  2020
 País:       Venezuela
@@ -389,17 +392,17 @@ Selector de nivel que muestra grid de materias agrupadas por grado.
 Cada grado: card con lista de materias. **Animación:** cards con stagger `fadeUp`.
 
 ### 4.3 `Enrollment.tsx` — `client:visible` — fondo oscuro `#0F0F0E`
-Stepper vertical con los 7 pasos del proceso:
+Stepper vertical con los 7 pasos del proceso (requisitos reales del colegio, año escolar 2026-2027):
 
-1. **Consulta de cupos** — Comunicarse con secretaría para verificar disponibilidad
-2. **Documentos del estudiante** — Registro civil (< 7 años) o tarjeta de identidad, certificado de notas, paz y salvo del colegio anterior
-3. **Documentos del acudiente** — Cédula de ciudadanía, comprobante de domicilio
-4. **Fotos** — 2 fotos recientes 3×4 fondo blanco
-5. **Formulario de inscripción** — Diligenciar el formulario oficial de la institución
-6. **Entrevista** — Reunión con coordinación académica (cita previa)
-7. **Matrícula** — Pago y firma del contrato de matrícula
+1. **Consulta de cupos** — Comunicarse con secretaría para verificar disponibilidad en el grado deseado
+2. **Material de oficina** — Carpeta tamaño oficio marrón con gancho y 3 fundas tipo oficio
+3. **Documentos del estudiante** — Copia de la cédula de identidad ampliada (centrada en la hoja), partida de nacimiento, 2 fotos tipo carnet y documentos probatorios de 6to grado. El estudiante debe asistir al momento de la inscripción
+4. **Notas para 2° a 5° año** — Notas certificadas del año anterior junto a la constancia, certificado e histórico SIGE
+5. **Documentos del representante** — Copia de la cédula de identidad ampliada de madre y padre, 2 fotos tipo carnet y número de celular con WhatsApp
+6. **Casos especiales** — Estudios en el extranjero requieren notas certificadas y apostilladas. Si el representante no es padre o madre, presentar original de la "Autorización de Representación Escolar" (LOPNA)
+7. **Inscripción y matrícula** — Diligenciar el formulario oficial, entrevista con coordinación académica (cita previa) y firma del contrato anual
 
-Período de inscripciones: **15 de noviembre – 28 de febrero**
+Banner de período: **Año Escolar 2026 – 2027 · Inscripciones abiertas**
 CTA: botón "Descargar formulario" (`<a href="#">` decorativo, estilo `primary`)
 **Animación:** pasos entran en stagger desde abajo.
 
@@ -462,11 +465,11 @@ Avatares circulares placeholder: `https://picsum.photos/seed/{nombre}/80/80`
 Dos columnas:
 
 **Izquierda — Info de contacto:**
-- `MapPin` — Avenida Bolívar, Sector Centro, Santa Ana del Táchira, Edo. Táchira
+- `MapPin` — Calle 14 entre carreras 8 y 9, N° 8-05, Barrio Libertador, Santa Ana, Mun. Córdoba, Edo. Táchira
 - `Phone` — (0276) 555-3478 | 0414 555 8290
 - `Mail` — info@colegiovirgiliomedina.edu.ve
 - `Clock` — Lunes a Viernes, 7:00am – 4:00pm
-- Íconos de redes: Facebook, Instagram, YouTube (links `#`)
+- Íconos de redes: TikTok (`https://www.tiktok.com/@u.e.colegio.virgi`)
 
 **Derecha — Mapa:**
 - Imagen placeholder `picsum.photos/seed/map/600/400` con pin SVG superpuesto, o iframe de Google Maps con coordenadas ficticias

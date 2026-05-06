@@ -21,31 +21,34 @@ const STEPS: Step[] = [
       "Comunicarse con secretaría para verificar disponibilidad en el grado deseado.",
   },
   {
+    title: "Material de oficina",
+    description:
+      "Carpeta tamaño oficio marrón con gancho y 3 fundas tipo oficio.",
+  },
+  {
     title: "Documentos del estudiante",
     description:
-      "Partida de nacimiento, cédula de identidad (a partir de los 9 años), boletín de notas y constancia de promoción del año anterior.",
+      "Copia de la cédula de identidad ampliada (centrada en la hoja), partida de nacimiento, 2 fotos tipo carnet y documentos probatorios de 6to grado. El estudiante debe asistir al momento de la inscripción.",
+  },
+  {
+    title: "Notas para 2° a 5° año",
+    description:
+      "Quienes ingresan a estos grados deben anexar las notas certificadas del año anterior junto a la constancia, certificado e histórico SIGE.",
   },
   {
     title: "Documentos del representante",
     description:
-      "Cédula de identidad del representante legal y comprobante de domicilio.",
+      "Copia de la cédula de identidad ampliada de madre y padre, 2 fotos tipo carnet y número de celular con WhatsApp.",
   },
   {
-    title: "Fotografías",
-    description: "Dos fotos recientes tipo carnet, fondo blanco.",
-  },
-  {
-    title: "Formulario de inscripción",
-    description: "Diligenciar el formulario oficial entregado por secretaría.",
-  },
-  {
-    title: "Entrevista",
+    title: "Casos especiales",
     description:
-      "Reunión del estudiante y su representante con la coordinación académica (con cita previa).",
+      "Estudios en el extranjero requieren notas certificadas y apostilladas. Si el representante no es padre o madre, presentar original de la «Autorización de Representación Escolar» (LOPNA).",
   },
   {
-    title: "Matrícula",
-    description: "Pago de la matrícula anual y firma del contrato.",
+    title: "Inscripción y matrícula",
+    description:
+      "Diligenciar el formulario oficial, entrevista con coordinación académica (con cita previa) y firma del contrato anual.",
   },
 ];
 
@@ -71,7 +74,7 @@ export function Enrollment() {
           >
             <Calendar className="h-4 w-4 text-gold" aria-hidden />
             <span className="text-sm text-bone/85">
-              Inscripciones abiertas · 1 de abril – 30 de agosto
+              Año Escolar 2026 – 2027 · Inscripciones abiertas
             </span>
           </motion.span>
         </div>

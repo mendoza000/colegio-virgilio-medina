@@ -62,7 +62,7 @@ export function Navbar() {
               </a>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5" aria-hidden />
-                Santa Ana del Táchira, Venezuela
+                Santa Ana, Edo. Táchira · Venezuela
               </span>
             </div>
 
@@ -73,6 +73,8 @@ export function Navbar() {
                     key={label}
                     href={href}
                     aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="transition-colors hover:text-gold"
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -206,6 +208,8 @@ export function Navbar() {
                       key={label}
                       href={href}
                       aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="transition-colors hover:text-gold"
                     >
                       <Icon className="h-4 w-4" />
