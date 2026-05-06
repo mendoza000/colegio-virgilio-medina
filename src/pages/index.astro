@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 ---
 
 <Layout>
-  <!-- SECCIÓN: Navbar -->
+  <Navbar client:load />
 
-  <!-- SECCIÓN: Hero -->
+  <Hero client:load />
 
   <!-- SECCIÓN: About -->
 
