@@ -54,11 +54,11 @@ export function Navbar() {
           <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6 lg:px-10">
             <div className="flex items-center gap-6 text-xs text-bone/70">
               <a
-                href="mailto:info@colegiovirgiliomedina.edu.ve"
+                href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
                 className="inline-flex items-center gap-2 transition-colors hover:text-gold"
               >
                 <Mail className="h-3.5 w-3.5" aria-hidden />
-                info@colegiovirgiliomedina.edu.ve
+                colegioprivadovirgiliomedinaramirez@gmail.com
               </a>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5" aria-hidden />
@@ -196,7 +196,7 @@ export function Navbar() {
 
               <div className="mt-auto flex items-center justify-between border-t border-bone/10 pt-6 text-xs text-bone/60">
                 <a
-                  href="mailto:info@colegiovirgiliomedina.edu.ve"
+                  href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
                   className="inline-flex items-center gap-2 transition-colors hover:text-gold"
                 >
                   <Mail className="h-3.5 w-3.5" aria-hidden />

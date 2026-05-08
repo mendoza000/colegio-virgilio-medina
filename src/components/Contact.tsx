@@ -21,16 +21,15 @@ const ITEMS: ContactItem[] = [
   },
   {
     Icon: Phone,
-    label: "Teléfonos",
-    primary: "(0276) 555-3478",
-    secondary: "0414 555 8290",
-    href: "tel:+582765553478",
+    label: "Teléfono",
+    primary: "(0276) 766-8102",
+    href: "tel:+582767668102",
   },
   {
     Icon: Mail,
     label: "Correo electrónico",
-    primary: "info@colegiovirgiliomedina.edu.ve",
-    href: "mailto:info@colegiovirgiliomedina.edu.ve",
+    primary: "colegioprivadovirgiliomedinaramirez@gmail.com",
+    href: "mailto:colegioprivadovirgiliomedinaramirez@gmail.com",
   },
   {
     Icon: Clock,
@@ -62,7 +61,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col gap-6"
+            className="flex min-w-0 flex-col gap-6"
           >
             <ul className="flex flex-col gap-4">
               {ITEMS.map(({ Icon, label, primary, secondary, href }) => {
@@ -71,13 +70,13 @@ export function Contact() {
                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-bone">
                       <Icon className="h-5 w-5 text-gold" aria-hidden />
                     </span>
-                    <div className="flex flex-col gap-0.5">
+                    <div className="flex min-w-0 flex-col gap-0.5">
                       <span className="text-xs uppercase tracking-[0.22em] text-ink-muted">
                         {label}
                       </span>
-                      <span className="font-medium text-ink">{primary}</span>
+                      <span className="font-medium break-words text-ink">{primary}</span>
                       {secondary ? (
-                        <span className="text-sm font-medium text-ink/75">
+                        <span className="text-sm font-medium break-words text-ink/75">
                           {secondary}
                         </span>
                       ) : null}
@@ -128,13 +127,13 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="overflow-hidden rounded-2xl border border-gold/30 shadow-[var(--shadow-gold)]"
+            className="min-w-0 overflow-hidden rounded-2xl border border-gold/30 shadow-[var(--shadow-gold)]"
           >
             <iframe
               src={MAP_SRC}
               title="Mapa de Santa Ana del Táchira"
               loading="lazy"
-              className="h-80 w-full lg:h-full lg:min-h-[28rem]"
+              className="block h-80 w-full max-w-full lg:h-full lg:min-h-[28rem]"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </motion.div>

@@ -37,6 +37,11 @@ export const TiktokIcon = (props: SVGProps<SVGSVGElement>) => (
 
 export const SOCIAL_LINKS = [
   {
+    href: "https://www.facebook.com/profile.php?id=100086925978400",
+    label: "Facebook",
+    Icon: FacebookIcon,
+  },
+  {
     href: "https://www.tiktok.com/@u.e.colegio.virgi",
     label: "TikTok",
     Icon: TiktokIcon,

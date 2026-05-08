@@ -78,20 +78,20 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+582765553478"
+                  href="tel:+582767668102"
                   className="flex items-center gap-3 font-medium text-bone/75 transition-colors hover:text-gold"
                 >
                   <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  (0276) 555-3478 · 0414 555 8290
+                  (0276) 766-8102
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@colegiovirgiliomedina.edu.ve"
-                  className="flex items-center gap-3 font-medium text-bone/75 transition-colors hover:text-gold"
+                  href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
+                  className="flex items-start gap-3 font-medium text-bone/75 transition-colors hover:text-gold"
                 >
-                  <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  info@colegiovirgiliomedina.edu.ve
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+                  <span className="break-all">colegioprivadovirgiliomedinaramirez@gmail.com</span>
                 </a>
               </li>
             </ul>
