@@ -1,0 +1,79 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SingletonForm from "../../components/admin/SingletonForm";
+import ListEditor from "../../components/admin/ListEditor";
+import { getSectionHeadings, getAcademicLevels } from "../../lib/content";
+
+const headings = await getSectionHeadings();
+const levels = await getAcademicLevels();
+---
+
+<Layout title="Niveles académicos — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/academic-levels">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Niveles académicos"
+        subtitle="Primaria y Bachillerato: descripción y puntos destacados de cada uno."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Niveles académicos."
+        icon="Type"
+        endpoint="/api/admin/headings/academic_levels"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.academic_levels?.label ?? "",
+          title: headings.academic_levels?.title ?? "",
+          subtitle: headings.academic_levels?.subtitle ?? "",
+        }}
+      />
+
+      {levels.map((level) => (
+        <div class="flex flex-col gap-4">
+          <SingletonForm
+            client:load
+            title={level.name}
+            icon="GraduationCap"
+            endpoint="/api/admin/lists/academic_levels"
+            extraPayload={{ id: level.id }}
+            fields={[
+              { key: "name", label: "Nombre" },
+              { key: "grades", label: "Grados" },
+              { key: "description", label: "Descripción", type: "textarea" },
+              { key: "image_url", label: "URL de la imagen", wide: true },
+            ]}
+            initialValues={{
+              name: level.name,
+              grades: level.grades,
+              description: level.description,
+              image_url: level.image_url,
+            }}
+          />
+
+          <ListEditor
+            client:load
+            title="Puntos destacados"
+            description={`Puntos destacados de ${level.name}.`}
+            icon="Star"
+            endpoint="/api/admin/lists/academic_level_features"
+            fields={[
+              { key: "icon", label: "Ícono", type: "icon" },
+              { key: "title", label: "Título" },
+            ]}
+            items={level.features}
+            extraPayload={{ level_id: level.id }}
+            addLabel="Agregar punto destacado"
+          />
+        </div>
+      ))}
+    </div>
+  </AdminShell>
+</Layout>

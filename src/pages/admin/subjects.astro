@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SingletonForm from "../../components/admin/SingletonForm";
+import ListEditor from "../../components/admin/ListEditor";
+import { getSectionHeadings, getAcademicLevels, getSubjectsByLevel } from "../../lib/content";
+
+const headings = await getSectionHeadings();
+const levels = await getAcademicLevels();
+const subjectsByLevel = await getSubjectsByLevel();
+---
+
+<Layout title="Materias — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/subjects">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Materias por nivel"
+        subtitle="Lista de materias que se dictan en cada nivel académico."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Materias."
+        icon="Type"
+        endpoint="/api/admin/headings/subjects"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.subjects?.label ?? "",
+          title: headings.subjects?.title ?? "",
+          subtitle: headings.subjects?.subtitle ?? "",
+        }}
+      />
+
+      {levels.map((level) => (
+        <ListEditor
+          client:load
+          title={level.name}
+          icon="BookOpen"
+          endpoint="/api/admin/lists/subjects"
+          fields={[{ key: "name", label: "Materia" }]}
+          items={subjectsByLevel[level.slug] ?? []}
+          extraPayload={{ level_id: level.id }}
+          addLabel="Agregar materia"
+        />
+      ))}
+    </div>
+  </AdminShell>
+</Layout>

@@ -1,0 +1,70 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SingletonForm from "../../components/admin/SingletonForm";
+import ListEditor from "../../components/admin/ListEditor";
+import { getSectionHeadings, getScheduleRows, getExtracurricularActivities } from "../../lib/content";
+
+const headings = await getSectionHeadings();
+const rows = await getScheduleRows();
+const activities = await getExtracurricularActivities();
+---
+
+<Layout title="Horarios — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/schedules">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Horarios y actividades extracurriculares"
+        subtitle="Jornada escolar y talleres de la tarde."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Horarios."
+        icon="Type"
+        endpoint="/api/admin/headings/schedules"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.schedules?.label ?? "",
+          title: headings.schedules?.title ?? "",
+          subtitle: headings.schedules?.subtitle ?? "",
+        }}
+      />
+
+      <ListEditor
+        client:load
+        title="Jornada escolar"
+        icon="CalendarClock"
+        endpoint="/api/admin/lists/schedule_rows"
+        fields={[
+          { key: "icon", label: "Ícono", type: "icon" },
+          { key: "label", label: "Etiqueta" },
+          { key: "value", label: "Horario" },
+          { key: "aside", label: "Nota (opcional)" },
+        ]}
+        items={rows}
+        addLabel="Agregar horario"
+      />
+
+      <ListEditor
+        client:load
+        title="Actividades extracurriculares"
+        icon="Music"
+        endpoint="/api/admin/lists/extracurricular_activities"
+        fields={[
+          { key: "activity", label: "Actividad" },
+          { key: "day", label: "Día" },
+          { key: "time_range", label: "Horario" },
+        ]}
+        items={activities}
+        addLabel="Agregar actividad"
+      />
+    </div>
+  </AdminShell>
+</Layout>

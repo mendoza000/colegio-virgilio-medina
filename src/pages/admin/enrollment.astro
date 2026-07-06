@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SingletonForm from "../../components/admin/SingletonForm";
+import ListEditor from "../../components/admin/ListEditor";
+import DocumentUploadField from "../../components/admin/DocumentUploadField";
+import { getSectionHeadings, getEnrollmentSteps, getEnrollmentSettings } from "../../lib/content";
+
+const headings = await getSectionHeadings();
+const steps = await getEnrollmentSteps();
+const settings = await getEnrollmentSettings();
+---
+
+<Layout title="Inscripción — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/enrollment">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Proceso de inscripción"
+        subtitle="Pasos del proceso, año escolar y formulario descargable."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Inscripción."
+        icon="Type"
+        endpoint="/api/admin/headings/enrollment"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.enrollment?.label ?? "",
+          title: headings.enrollment?.title ?? "",
+          subtitle: headings.enrollment?.subtitle ?? "",
+        }}
+      />
+
+      <SingletonForm
+        client:load
+        title="Año escolar"
+        icon="ClipboardList"
+        endpoint="/api/admin/settings/enrollment_settings"
+        fields={[{ key: "school_year_badge", label: "Texto del año escolar" }]}
+        initialValues={{ school_year_badge: settings.school_year_badge }}
+      />
+
+      <DocumentUploadField
+        client:load
+        label="Formulario de inscripción (PDF)"
+        target="enrollment_form"
+        icon="FileText"
+        currentUrl={settings.form_pdf_url}
+      />
+
+      <ListEditor
+        client:load
+        title="Pasos del proceso"
+        icon="ClipboardList"
+        endpoint="/api/admin/lists/enrollment_steps"
+        fields={[
+          { key: "title", label: "Título" },
+          { key: "description", label: "Descripción", type: "textarea" },
+        ]}
+        items={steps}
+        addLabel="Agregar paso"
+      />
+    </div>
+  </AdminShell>
+</Layout>

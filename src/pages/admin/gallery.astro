@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import GalleryManager from "../../components/admin/GalleryManager";
+import SingletonForm from "../../components/admin/SingletonForm";
+import { getGalleryImages, getSectionHeadings } from "../../lib/content";
+
+const images = await getGalleryImages();
+const headings = await getSectionHeadings();
+---
+
+<Layout title="Galería — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/gallery">
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-8">
+      <AdminPageHeader
+        title="Galería"
+        subtitle="Subí, editá o eliminá las fotos que se muestran en la sección Galería del sitio."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Galería."
+        icon="Type"
+        endpoint="/api/admin/headings/gallery"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.gallery?.label ?? "",
+          title: headings.gallery?.title ?? "",
+          subtitle: headings.gallery?.subtitle ?? "",
+        }}
+      />
+
+      <GalleryManager client:load initialImages={images} />
+    </div>
+  </AdminShell>
+</Layout>

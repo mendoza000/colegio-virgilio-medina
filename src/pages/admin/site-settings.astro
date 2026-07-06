@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SiteSettingsForm from "../../components/admin/SiteSettingsForm";
+import SingletonForm from "../../components/admin/SingletonForm";
+import { getSiteSettings, getSocialLinks, getSectionHeadings } from "../../lib/content";
+
+const settings = await getSiteSettings();
+const socialLinks = await getSocialLinks();
+const headings = await getSectionHeadings();
+---
+
+<Layout title="Datos generales — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/site-settings">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Datos generales, logo y contacto"
+        subtitle="Información institucional, logo y redes sociales que se muestran en todo el sitio."
+      />
+
+      <SiteSettingsForm client:load settings={settings} socialLinks={socialLinks} />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección Contacto"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Contacto."
+        icon="Type"
+        endpoint="/api/admin/headings/contact"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.contact?.label ?? "",
+          title: headings.contact?.title ?? "",
+          subtitle: headings.contact?.subtitle ?? "",
+        }}
+      />
+    </div>
+  </AdminShell>
+</Layout>

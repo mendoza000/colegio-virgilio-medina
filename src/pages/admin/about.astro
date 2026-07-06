@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import SingletonForm from "../../components/admin/SingletonForm";
+import ListEditor from "../../components/admin/ListEditor";
+import { getSectionHeadings, getAboutContent, getAboutValues } from "../../lib/content";
+
+const headings = await getSectionHeadings();
+const about = await getAboutContent();
+const values = await getAboutValues();
+---
+
+<Layout title="Nosotros — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/about">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="Nosotros"
+        subtitle="Encabezado de la sección, misión, visión y valores institucionales."
+      />
+
+      <SingletonForm
+        client:load
+        title="Encabezado de la sección"
+        description="Etiqueta, título y subtítulo que se muestran arriba de Nosotros."
+        icon="Type"
+        endpoint="/api/admin/headings/about"
+        fields={[
+          { key: "label", label: "Etiqueta" },
+          { key: "title", label: "Título" },
+          { key: "subtitle", label: "Subtítulo", type: "textarea" },
+        ]}
+        initialValues={{
+          label: headings.about?.label ?? "",
+          title: headings.about?.title ?? "",
+          subtitle: headings.about?.subtitle ?? "",
+        }}
+      />
+
+      <SingletonForm
+        client:load
+        title="Misión y visión"
+        icon="Compass"
+        endpoint="/api/admin/settings/about_content"
+        fields={[
+          { key: "mission", label: "Misión", type: "textarea" },
+          { key: "vision", label: "Visión", type: "textarea" },
+          { key: "image_url", label: "URL de la imagen", wide: true },
+        ]}
+        initialValues={{
+          mission: about.mission,
+          vision: about.vision,
+          image_url: about.image_url,
+        }}
+      />
+
+      <ListEditor
+        client:load
+        title="Valores institucionales"
+        icon="Heart"
+        endpoint="/api/admin/lists/about_values"
+        fields={[
+          { key: "icon", label: "Ícono", type: "icon" },
+          { key: "title", label: "Título" },
+          { key: "description", label: "Descripción", type: "textarea" },
+        ]}
+        items={values}
+        addLabel="Agregar valor"
+      />
+    </div>
+  </AdminShell>
+</Layout>

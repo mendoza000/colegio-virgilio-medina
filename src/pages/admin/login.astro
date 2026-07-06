@@ -1,0 +1,12 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LoginForm from "../../components/admin/LoginForm";
+
+export const prerender = false;
+---
+
+<Layout title="Iniciar sesión — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <main class="flex min-h-screen items-center justify-center bg-bone px-6">
+    <LoginForm client:load />
+  </main>
+</Layout>
