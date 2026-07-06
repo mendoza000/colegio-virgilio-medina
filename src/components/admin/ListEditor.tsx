@@ -9,7 +9,7 @@ import { ICON_MAP } from "../../lib/icons";
 type FieldConfig = {
   key: string;
   label: string;
-  type?: "text" | "textarea" | "icon";
+  type?: "text" | "textarea" | "icon" | "number";
   iconOptions?: Record<string, (props: SVGProps<SVGSVGElement>) => ReactNode>;
 };
 type Item = { id: string; order_index?: number; [key: string]: unknown };
@@ -58,7 +58,7 @@ export function ListEditor({
 
   function openEdit(item: Item) {
     const initial: Record<string, string> = {};
-    for (const field of fields) initial[field.key] = (item[field.key] as string) ?? "";
+    for (const field of fields) initial[field.key] = String(item[field.key] ?? "");
     setValues(initial);
     setError(null);
     setModal({ mode: "edit", item });
@@ -161,7 +161,7 @@ export function ListEditor({
     }
     return (
       <input
-        type="text"
+        type={field.type === "number" ? "number" : "text"}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-lg border border-ink/15 bg-bone/60 px-3 py-2 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:border-green"
@@ -225,7 +225,7 @@ export function ListEditor({
                     {previewFields.map((field) => (
                       <td key={field.key} className="max-w-xs px-3 py-3 text-ink">
                         <span className="block truncate">
-                          {truncate((item[field.key] as string) ?? "")}
+                          {truncate(String(item[field.key] ?? ""))}
                         </span>
                       </td>
                     ))}

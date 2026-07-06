@@ -11,17 +11,15 @@ const fadeUp = {
 };
 
 type Stat = {
-  prefix?: string;
+  id: string;
+  prefix: string;
   target: number;
   label: string;
 };
 
-const STATS: Stat[] = [
-  { prefix: "+", target: 6, label: "Años formando estudiantes" },
-  { prefix: "+", target: 850, label: "Estudiantes activos" },
-  { prefix: "+", target: 60, label: "Docentes titulados" },
-  { target: 12, label: "Proyectos extracurriculares" },
-];
+type Props = {
+  stats: Stat[];
+};
 
 function StatNumber({ target, prefix = "" }: { target: number; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -56,7 +54,7 @@ function StatNumber({ target, prefix = "" }: { target: number; prefix?: string }
   );
 }
 
-export function Stats() {
+export function Stats({ stats }: Props) {
   return (
     <section className="relative bg-carbon py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -68,9 +66,9 @@ export function Stats() {
         </div>
 
         <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-green/20">
-          {STATS.map((stat, i) => (
+          {stats.map((stat, i) => (
             <motion.div
-              key={stat.label}
+              key={stat.id}
               custom={i}
               initial="hidden"
               whileInView="visible"

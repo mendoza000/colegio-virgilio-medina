@@ -1,0 +1,34 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import ListEditor from "../../components/admin/ListEditor";
+import { getStats } from "../../lib/content";
+
+const stats = await getStats();
+---
+
+<Layout title="El colegio en cifras — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/stats">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+      <AdminPageHeader
+        title="El colegio en cifras"
+        subtitle="Cifras destacadas que aparecen debajo de Nosotros."
+      />
+
+      <ListEditor
+        client:load
+        title="Cifras"
+        icon="TrendingUp"
+        endpoint="/api/admin/lists/stats"
+        fields={[
+          { key: "prefix", label: "Prefijo (ej. +)" },
+          { key: "target", label: "Cifra", type: "number" },
+          { key: "label", label: "Descripción" },
+        ]}
+        items={stats}
+        addLabel="Agregar cifra"
+      />
+    </div>
+  </AdminShell>
+</Layout>

@@ -25,6 +25,7 @@ import {
   getEnrollmentSteps,
   getEnrollmentSettings,
   getGalleryImages,
+  getStats,
 } from "../lib/content";
 
 const [
@@ -40,6 +41,7 @@ const [
   enrollmentSteps,
   enrollmentSettings,
   galleryPhotos,
+  stats,
 ] = await Promise.all([
   getSiteSettings(),
   getSocialLinks(),
@@ -53,6 +55,7 @@ const [
   getEnrollmentSteps(),
   getEnrollmentSettings(),
   getGalleryImages(),
+  getStats(),
 ]);
 ---
 
@@ -70,7 +73,7 @@ const [
     values={aboutValues}
   />
 
-  <Stats client:visible />
+  <Stats client:visible stats={stats} />
 
   <AcademicLevels client:visible heading={headings.academic_levels} levels={academicLevels} />
 

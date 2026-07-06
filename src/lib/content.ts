@@ -170,6 +170,16 @@ export async function getEnrollmentSteps(): Promise<EnrollmentStep[]> {
   return data ?? [];
 }
 
+export type Stat = { id: string; prefix: string; target: number; label: string };
+
+export async function getStats(): Promise<Stat[]> {
+  const { data } = await db
+    .from("stats")
+    .select("id, prefix, target, label")
+    .order("order_index", { ascending: true });
+  return data ?? [];
+}
+
 export async function getEnrollmentSettings() {
   const { data } = await db.from("enrollment_settings").select("*").eq("id", 1).single();
   return {

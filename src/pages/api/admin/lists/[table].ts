@@ -4,7 +4,7 @@ import { createSupabaseAdminClient } from "../../../../lib/supabase-server";
 // Allow-list of tables this generic CRUD route is permitted to touch, and
 // which columns a client may write. `scoped: true` tables require a
 // `level_id` (query param on GET, body field on POST).
-const TABLES: Record<string, { columns: string[]; scoped?: boolean }> = {
+const TABLES: Record<string, { columns: string[]; scoped?: boolean; numberColumns?: string[] }> = {
   subjects: { columns: ["name"], scoped: true },
   schedule_rows: { columns: ["icon", "label", "value", "aside"] },
   extracurricular_activities: { columns: ["activity", "day", "time_range"] },
@@ -13,7 +13,13 @@ const TABLES: Record<string, { columns: string[]; scoped?: boolean }> = {
   academic_level_features: { columns: ["icon", "title"], scoped: true },
   academic_levels: { columns: ["slug", "name", "grades", "description", "image_url"] },
   social_links: { columns: ["platform", "label", "href"] },
+  stats: { columns: ["prefix", "target", "label"], numberColumns: ["target"] },
 };
+
+function coerce(config: { numberColumns?: string[] }, col: string, value: unknown) {
+  if (config.numberColumns?.includes(col)) return Number(value ?? 0);
+  return value ?? "";
+}
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
@@ -42,7 +48,7 @@ export const POST: APIRoute = async ({ params, request }) => {
   const supabase = createSupabaseAdminClient();
 
   const payload: Record<string, unknown> = {};
-  for (const col of config.columns) payload[col] = body[col] ?? "";
+  for (const col of config.columns) payload[col] = coerce(config, col, body[col]);
   if (config.scoped) {
     if (!body.level_id) return json({ error: "level_id requerido" }, 400);
     payload.level_id = body.level_id;
@@ -69,7 +75,7 @@ export const PATCH: APIRoute = async ({ params, request }) => {
 
   const updates: Record<string, unknown> = {};
   for (const col of [...config.columns, "order_index"]) {
-    if (col in fields) updates[col] = fields[col];
+    if (col in fields) updates[col] = coerce(config, col, fields[col]);
   }
 
   const supabase = createSupabaseAdminClient();

@@ -6,6 +6,7 @@ import {
   GraduationCap,
   Image,
   Settings,
+  TrendingUp,
   Users,
 } from "lucide-react";
 
@@ -46,6 +47,13 @@ export const SECTIONS: AdminSection[] = [
     label: "Niveles académicos",
     description: "Primaria y Bachillerato: descripción y puntos destacados.",
     icon: GraduationCap,
+    ready: true,
+  },
+  {
+    href: "/admin/stats",
+    label: "El colegio en cifras",
+    description: "Cifras destacadas que aparecen debajo de Nosotros.",
+    icon: TrendingUp,
     ready: true,
   },
   {
