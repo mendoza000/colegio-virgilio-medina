@@ -4,6 +4,7 @@ import AdminShell from "../../components/admin/AdminShell";
 import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
 import SingletonForm from "../../components/admin/SingletonForm";
 import ListEditor from "../../components/admin/ListEditor";
+import ImageUploadField from "../../components/admin/ImageUploadField";
 import { getSectionHeadings, getAboutContent, getAboutValues } from "../../lib/content";
 
 const headings = await getSectionHeadings();
@@ -45,13 +46,19 @@ const values = await getAboutValues();
         fields={[
           { key: "mission", label: "Misión", type: "textarea" },
           { key: "vision", label: "Visión", type: "textarea" },
-          { key: "image_url", label: "URL de la imagen", wide: true },
         ]}
         initialValues={{
           mission: about.mission,
           vision: about.vision,
-          image_url: about.image_url,
         }}
+      />
+
+      <ImageUploadField
+        client:load
+        label="Imagen de misión y visión"
+        target="about"
+        icon="Compass"
+        currentUrl={about.image_url}
       />
 
       <ListEditor

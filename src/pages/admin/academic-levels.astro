@@ -4,6 +4,7 @@ import AdminShell from "../../components/admin/AdminShell";
 import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
 import SingletonForm from "../../components/admin/SingletonForm";
 import ListEditor from "../../components/admin/ListEditor";
+import ImageUploadField from "../../components/admin/ImageUploadField";
 import { getSectionHeadings, getAcademicLevels } from "../../lib/content";
 
 const headings = await getSectionHeadings();
@@ -48,14 +49,21 @@ const levels = await getAcademicLevels();
               { key: "name", label: "Nombre" },
               { key: "grades", label: "Grados" },
               { key: "description", label: "Descripción", type: "textarea" },
-              { key: "image_url", label: "URL de la imagen", wide: true },
             ]}
             initialValues={{
               name: level.name,
               grades: level.grades,
               description: level.description,
-              image_url: level.image_url,
             }}
+          />
+
+          <ImageUploadField
+            client:load
+            label={`Imagen de ${level.name}`}
+            target="academic_level"
+            id={level.id}
+            icon="GraduationCap"
+            currentUrl={level.image_url}
           />
 
           <ListEditor

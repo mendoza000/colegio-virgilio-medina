@@ -6,9 +6,10 @@ type Props = {
   target: string;
   currentUrl: string;
   icon?: string;
+  id?: string;
 };
 
-export function ImageUploadField({ label, target, currentUrl, icon }: Props) {
+export function ImageUploadField({ label, target, currentUrl, icon, id }: Props) {
   const Icon = icon ? ICON_MAP[icon] : undefined;
   const [url, setUrl] = useState(currentUrl);
   const [uploading, setUploading] = useState(false);
@@ -22,6 +23,7 @@ export function ImageUploadField({ label, target, currentUrl, icon }: Props) {
     const form = new FormData();
     form.append("file", file);
     form.append("target", target);
+    if (id) form.append("id", id);
 
     const res = await fetch("/api/admin/branding-upload", { method: "POST", body: form });
     setUploading(false);

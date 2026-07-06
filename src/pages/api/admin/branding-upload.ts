@@ -4,6 +4,8 @@ import { createSupabaseAdminClient } from "../../../lib/supabase-server";
 const TARGETS: Record<string, { path: string; table: string; column: string }> = {
   logo: { path: "logo", table: "site_settings", column: "logo_url" },
   enrollment_form: { path: "formulario-inscripcion", table: "enrollment_settings", column: "form_pdf_url" },
+  about: { path: "about", table: "about_content", column: "image_url" },
+  academic_level: { path: "academic-level", table: "academic_levels", column: "image_url" },
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -11,6 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
   const file = form.get("file");
   const targetKey = String(form.get("target") ?? "");
   const target = TARGETS[targetKey];
+  const rowId = String(form.get("id") ?? "1");
 
   if (!(file instanceof File) || !target) {
     return new Response(JSON.stringify({ error: "Archivo o destino inválido" }), {
@@ -21,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const supabase = createSupabaseAdminClient();
   const extension = file.name.split(".").pop() ?? "bin";
-  const path = `${target.path}.${extension}`;
+  const path = rowId === "1" ? `${target.path}.${extension}` : `${target.path}-${rowId}.${extension}`;
 
   const { error: uploadError } = await supabase.storage
     .from("branding")
@@ -39,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
   const { error: updateError } = await supabase
     .from(target.table)
     .update({ [target.column]: publicUrl })
-    .eq("id", 1);
+    .eq("id", rowId);
 
   if (updateError) {
     return new Response(JSON.stringify({ error: updateError.message }), {
