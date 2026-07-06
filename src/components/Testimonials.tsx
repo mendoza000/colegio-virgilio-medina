@@ -93,7 +93,7 @@ export function Testimonials() {
           onMouseLeave={() => setIsPaused(false)}
         >
           <Quote
-            className="absolute -top-2 left-2 h-16 w-16 text-gold/15"
+            className="absolute -top-2 left-2 h-16 w-16 text-green/15"
             aria-hidden
           />
 
@@ -115,10 +115,10 @@ export function Testimonials() {
                   <img
                     src={`https://picsum.photos/seed/${active.avatarSeed}/120/120`}
                     alt={`Foto de ${active.name}`}
-                    className="h-16 w-16 rounded-full border-2 border-gold/40 object-cover"
+                    className="h-16 w-16 rounded-full border-2 border-green/40 object-cover"
                   />
                   <div className="flex flex-col gap-1">
-                    <span className="font-display text-lg text-gold">
+                    <span className="font-display text-lg text-green">
                       {active.name}
                     </span>
                     <span className="text-xs uppercase tracking-wider text-bone/60">
@@ -135,7 +135,7 @@ export function Testimonials() {
               type="button"
               onClick={prev}
               aria-label="Testimonio anterior"
-              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-bone transition-colors hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-green/30 text-bone transition-colors hover:border-green hover:text-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -152,7 +152,7 @@ export function Testimonials() {
                     aria-label={`Ver testimonio de ${t.name}`}
                     onClick={() => goTo(i)}
                     className={`h-2 cursor-pointer rounded-full transition-all ${
-                      isActive ? "w-8 bg-gold" : "w-2 bg-bone/30 hover:bg-bone/50"
+                      isActive ? "w-8 bg-green" : "w-2 bg-bone/30 hover:bg-bone/50"
                     }`}
                   />
                 );
@@ -163,7 +163,7 @@ export function Testimonials() {
               type="button"
               onClick={next}
               aria-label="Testimonio siguiente"
-              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-bone transition-colors hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-green/30 text-bone transition-colors hover:border-green hover:text-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green"
             >
               <ChevronRight className="h-5 w-5" />
             </button>

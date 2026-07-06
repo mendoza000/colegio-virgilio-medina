@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Button from "./ui/Button";
+import type { SiteSettings } from "../lib/content";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -10,7 +11,11 @@ const fadeUp = {
   }),
 };
 
-export function Hero() {
+type Props = {
+  slogan: SiteSettings["slogan"];
+};
+
+export function Hero({ slogan }: Props) {
   return (
     <section
       id="inicio"
@@ -38,9 +43,9 @@ export function Hero() {
             animate="visible"
             custom={0}
             variants={fadeUp}
-            className="inline-flex items-center gap-3 font-body text-xs uppercase tracking-[0.32em] text-gold"
+            className="inline-flex items-center gap-3 font-body text-xs uppercase tracking-[0.32em] text-green"
           >
-            <span className="h-px w-10 bg-gold" aria-hidden />
+            <span className="h-px w-10 bg-green" aria-hidden />
             Colegio Virgilio Medina · Desde 2020
           </motion.span>
 
@@ -53,7 +58,7 @@ export function Hero() {
           >
             Educación con propósito,
             <br />
-            <span className="text-gold">valores con carácter</span>
+            <span className="text-green">valores con carácter</span>
           </motion.h1>
 
           <motion.p
@@ -73,9 +78,9 @@ export function Hero() {
             animate="visible"
             custom={3}
             variants={fadeUp}
-            className="font-display text-xl italic text-gold md:text-2xl"
+            className="font-display text-xl italic text-green md:text-2xl"
           >
-            “Formando líderes con valores para el mundo”
+            “{slogan}”
           </motion.p>
 
           <motion.div
@@ -99,10 +104,10 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.85, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
-        className="absolute right-6 bottom-10 z-10 hidden items-center gap-4 rounded-2xl border border-gold/40 bg-carbon-soft/90 px-5 py-4 shadow-[var(--shadow-gold)] backdrop-blur lg:flex"
+        className="absolute right-6 bottom-10 z-10 hidden items-center gap-4 rounded-2xl border border-green/40 bg-carbon-soft/90 px-5 py-4 shadow-[var(--shadow-green)] backdrop-blur lg:flex"
         aria-label="Comunidad estudiantil"
       >
-        <span className="font-display text-4xl text-gold">+850</span>
+        <span className="font-display text-4xl text-green">+850</span>
         <span className="text-xs uppercase tracking-wider text-bone/70">
           Estudiantes
           <br />

@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { ReactElement, SVGProps } from "react";
 
 export const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -35,15 +35,9 @@ export const TiktokIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const SOCIAL_LINKS = [
-  {
-    href: "https://www.facebook.com/profile.php?id=100086925978400",
-    label: "Facebook",
-    Icon: FacebookIcon,
-  },
-  {
-    href: "https://www.tiktok.com/@u.e.colegio.virgi",
-    label: "TikTok",
-    Icon: TiktokIcon,
-  },
-] as const;
+export const SOCIAL_ICON_MAP: Record<string, (props: SVGProps<SVGSVGElement>) => ReactElement> = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  youtube: YoutubeIcon,
+  tiktok: TiktokIcon,
+};

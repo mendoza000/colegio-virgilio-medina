@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
-import { SOCIAL_LINKS } from "./icons/SocialIcons";
+import { SOCIAL_ICON_MAP, FacebookIcon } from "./icons/SocialIcons";
+import type { SiteSettings, SocialLink } from "../lib/content";
 
 const NAV_LINKS = [
   { href: "#inicio", label: "Inicio" },
@@ -13,10 +14,12 @@ const NAV_LINKS = [
   { href: "#contacto", label: "Contacto" },
 ];
 
-const LOGO_PLACEHOLDER =
-  "https://placehold.co/120x120/0F0F0E/C9920A/png?text=CVM&font=playfair";
+type Props = {
+  settings: SiteSettings;
+  socialLinks: SocialLink[];
+};
 
-export function Navbar() {
+export function Navbar({ settings, socialLinks }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,7 +38,7 @@ export function Navbar() {
   }, [menuOpen]);
 
   const headerSurface = scrolled
-    ? "bg-carbon/95 backdrop-blur-md border-b border-[var(--border-gold-subtle)] shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+    ? "bg-carbon/95 backdrop-blur-md border-b border-[var(--border-green-subtle)] shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
     : "bg-transparent border-b border-transparent";
 
   return (
@@ -54,11 +57,11 @@ export function Navbar() {
           <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6 lg:px-10">
             <div className="flex items-center gap-6 text-xs text-bone/70">
               <a
-                href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
-                className="inline-flex items-center gap-2 transition-colors hover:text-gold"
+                href={`mailto:${settings.email}`}
+                className="inline-flex items-center gap-2 transition-colors hover:text-green"
               >
                 <Mail className="h-3.5 w-3.5" aria-hidden />
-                colegioprivadovirgiliomedinaramirez@gmail.com
+                {settings.email}
               </a>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5" aria-hidden />
@@ -68,22 +71,25 @@ export function Navbar() {
 
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-3 text-bone/70">
-                {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="transition-colors hover:text-gold"
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                  </a>
-                ))}
+                {socialLinks.map(({ href, label, platform }) => {
+                  const Icon = SOCIAL_ICON_MAP[platform] ?? FacebookIcon;
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-green"
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                    </a>
+                  );
+                })}
               </div>
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold transition-colors hover:bg-gold hover:text-carbon"
+                className="inline-flex items-center gap-2 rounded-full border border-green/40 px-3 py-1 text-xs text-green transition-colors hover:bg-green hover:text-carbon"
               >
                 <Phone className="h-3 w-3" aria-hidden />
                 Contáctanos
@@ -96,7 +102,7 @@ export function Navbar() {
           <a href="#inicio" className="flex items-center gap-3" aria-label="Ir al inicio">
             <span className="inline-flex items-center justify-center overflow-hidden rounded-md bg-carbon">
               <img
-                src={LOGO_PLACEHOLDER}
+                src={settings.logo_url}
                 alt="Escudo del Colegio Virgilio Medina"
                 className="h-11 w-11"
               />
@@ -115,7 +121,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium tracking-wide text-bone/85 transition-colors hover:text-gold"
+                className="text-sm font-medium tracking-wide text-bone/85 transition-colors hover:text-green"
               >
                 {link.label}
               </a>
@@ -125,7 +131,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="#inscripcion"
-              className="hidden items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-carbon transition-colors hover:bg-gold-light md:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-green px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-carbon transition-colors hover:bg-green-light md:inline-flex"
             >
               Inscríbete
             </a>
@@ -133,7 +139,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-bone transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:hidden"
+              className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-bone transition-colors hover:text-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green lg:hidden"
               aria-label="Abrir menú"
             >
               <Menu className="h-6 w-6" />
@@ -158,7 +164,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute inset-y-0 right-0 flex w-80 max-w-full flex-col gap-8 bg-carbon p-8 shadow-[var(--shadow-gold)]"
+              className="absolute inset-y-0 right-0 flex w-80 max-w-full flex-col gap-8 bg-carbon p-8 shadow-[var(--shadow-green)]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between">
@@ -166,7 +172,7 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-bone transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-bone transition-colors hover:text-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green"
                   aria-label="Cerrar menú"
                 >
                   <X className="h-6 w-6" />
@@ -179,7 +185,7 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="font-display text-2xl tracking-wide text-bone transition-colors hover:text-gold"
+                    className="font-display text-2xl tracking-wide text-bone transition-colors hover:text-green"
                   >
                     {link.label}
                   </a>
@@ -189,32 +195,35 @@ export function Navbar() {
               <a
                 href="#inscripcion"
                 onClick={() => setMenuOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-full bg-gold px-5 py-3 text-sm font-medium uppercase tracking-wider text-carbon transition-colors hover:bg-gold-light"
+                className="mt-2 inline-flex items-center justify-center rounded-full bg-green px-5 py-3 text-sm font-medium uppercase tracking-wider text-carbon transition-colors hover:bg-green-light"
               >
                 Inscríbete
               </a>
 
               <div className="mt-auto flex items-center justify-between border-t border-bone/10 pt-6 text-xs text-bone/60">
                 <a
-                  href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
-                  className="inline-flex items-center gap-2 transition-colors hover:text-gold"
+                  href={`mailto:${settings.email}`}
+                  className="inline-flex items-center gap-2 transition-colors hover:text-green"
                 >
                   <Mail className="h-3.5 w-3.5" aria-hidden />
                   Escríbenos
                 </a>
                 <div className="flex items-center gap-3">
-                  {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      aria-label={label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-colors hover:text-gold"
-                    >
-                      <Icon className="h-4 w-4" />
-                    </a>
-                  ))}
+                  {socialLinks.map(({ href, label, platform }) => {
+                    const Icon = SOCIAL_ICON_MAP[platform] ?? FacebookIcon;
+                    return (
+                      <a
+                        key={label}
+                        href={href}
+                        aria-label={label}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors hover:text-green"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </motion.aside>

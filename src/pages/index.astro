@@ -12,30 +12,95 @@ import Gallery from "../components/Gallery";
 import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import {
+  getSiteSettings,
+  getSocialLinks,
+  getSectionHeadings,
+  getAboutContent,
+  getAboutValues,
+  getAcademicLevels,
+  getSubjectsByLevel,
+  getScheduleRows,
+  getExtracurricularActivities,
+  getEnrollmentSteps,
+  getEnrollmentSettings,
+  getGalleryImages,
+} from "../lib/content";
+
+const [
+  settings,
+  socialLinks,
+  headings,
+  about,
+  aboutValues,
+  academicLevels,
+  subjectsByLevel,
+  scheduleRows,
+  extracurricularActivities,
+  enrollmentSteps,
+  enrollmentSettings,
+  galleryPhotos,
+] = await Promise.all([
+  getSiteSettings(),
+  getSocialLinks(),
+  getSectionHeadings(),
+  getAboutContent(),
+  getAboutValues(),
+  getAcademicLevels(),
+  getSubjectsByLevel(),
+  getScheduleRows(),
+  getExtracurricularActivities(),
+  getEnrollmentSteps(),
+  getEnrollmentSettings(),
+  getGalleryImages(),
+]);
 ---
 
 <Layout>
-  <Navbar client:load />
+  <Navbar client:load settings={settings} socialLinks={socialLinks} />
 
-  <Hero client:load />
+  <Hero client:load slogan={settings.slogan} />
 
-  <About client:visible />
+  <About
+    client:visible
+    heading={headings.about}
+    mission={about.mission}
+    vision={about.vision}
+    imageUrl={about.image_url}
+    values={aboutValues}
+  />
 
   <Stats client:visible />
 
-  <AcademicLevels client:visible />
+  <AcademicLevels client:visible heading={headings.academic_levels} levels={academicLevels} />
 
-  <Schedules client:visible />
+  <Schedules
+    client:visible
+    heading={headings.schedules}
+    rows={scheduleRows}
+    activities={extracurricularActivities}
+  />
 
-  <Subjects client:visible />
+  <Subjects
+    client:visible
+    heading={headings.subjects}
+    levels={academicLevels}
+    subjectsByLevel={subjectsByLevel}
+  />
 
-  <Enrollment client:visible />
+  <Enrollment
+    client:visible
+    heading={headings.enrollment}
+    steps={enrollmentSteps}
+    schoolYearBadge={enrollmentSettings.school_year_badge}
+    formPdfUrl={enrollmentSettings.form_pdf_url}
+  />
 
-  <Gallery client:visible />
+  <Gallery client:visible heading={headings.gallery} photos={galleryPhotos} />
 
   <Testimonials client:visible />
 
-  <Contact client:visible />
+  <Contact client:visible settings={settings} heading={headings.contact} socialLinks={socialLinks} />
 
-  <Footer />
+  <Footer settings={settings} socialLinks={socialLinks} />
 </Layout>

@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import SectionTitle from "./ui/SectionTitle";
-import { SOCIAL_LINKS } from "./icons/SocialIcons";
+import { SOCIAL_ICON_MAP, FacebookIcon } from "./icons/SocialIcons";
+import type { SiteSettings, SectionHeading, SocialLink } from "../lib/content";
 
 type ContactItem = {
   Icon: LucideIcon;
@@ -12,44 +13,48 @@ type ContactItem = {
   href?: string;
 };
 
-const ITEMS: ContactItem[] = [
-  {
-    Icon: MapPin,
-    label: "Dirección",
-    primary: "Calle 14 entre carreras 8 y 9, N° 8-05",
-    secondary: "Barrio Libertador, Santa Ana, Mun. Córdoba, Edo. Táchira",
-  },
-  {
-    Icon: Phone,
-    label: "Teléfono",
-    primary: "(0276) 766-8102",
-    href: "tel:+582767668102",
-  },
-  {
-    Icon: Mail,
-    label: "Correo electrónico",
-    primary: "colegioprivadovirgiliomedinaramirez@gmail.com",
-    href: "mailto:colegioprivadovirgiliomedinaramirez@gmail.com",
-  },
-  {
-    Icon: Clock,
-    label: "Atención de secretaría",
-    primary: "Lunes a Viernes",
-    secondary: "7:00 AM – 4:00 PM",
-  },
-];
+type Props = {
+  settings: SiteSettings;
+  heading: SectionHeading;
+  socialLinks: SocialLink[];
+};
 
-const MAP_SRC =
-  "https://www.openstreetmap.org/export/embed.html?bbox=-72.275%2C7.560%2C-72.260%2C7.575&layer=mapnik&marker=7.5670%2C-72.2670";
+export function Contact({ settings, heading, socialLinks }: Props) {
+  const [officeHoursDays, officeHoursTime] = settings.office_hours.split("·").map((s) => s.trim());
 
-export function Contact() {
+  const ITEMS: ContactItem[] = [
+    {
+      Icon: MapPin,
+      label: "Dirección",
+      primary: settings.address,
+    },
+    {
+      Icon: Phone,
+      label: "Teléfono",
+      primary: settings.phone,
+      href: `tel:+58${settings.phone.replace(/\D/g, "").replace(/^0/, "")}`,
+    },
+    {
+      Icon: Mail,
+      label: "Correo electrónico",
+      primary: settings.email,
+      href: `mailto:${settings.email}`,
+    },
+    {
+      Icon: Clock,
+      label: "Atención de secretaría",
+      primary: officeHoursDays ?? settings.office_hours,
+      secondary: officeHoursTime,
+    },
+  ];
+
   return (
     <section id="contacto" className="bg-bone py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionTitle
-          label="Contacto"
-          title="Estamos cerca de ti"
-          subtitle="Visítanos, llámanos o escríbenos. Estaremos felices de recibirte en el Colegio Virgilio Medina."
+          label={heading.label}
+          title={heading.title}
+          subtitle={heading.subtitle ?? undefined}
           align="center"
           variant="light"
           className="mb-12"
@@ -67,8 +72,8 @@ export function Contact() {
               {ITEMS.map(({ Icon, label, primary, secondary, href }) => {
                 const content = (
                   <>
-                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-bone">
-                      <Icon className="h-5 w-5 text-gold" aria-hidden />
+                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-green/30 bg-bone">
+                      <Icon className="h-5 w-5 text-green" aria-hidden />
                     </span>
                     <div className="flex min-w-0 flex-col gap-0.5">
                       <span className="text-xs uppercase tracking-[0.22em] text-ink-muted">
@@ -85,7 +90,7 @@ export function Contact() {
                 );
 
                 const baseClass =
-                  "flex items-start gap-4 rounded-2xl border border-gold/15 bg-bone p-5 transition-colors hover:border-gold/40";
+                  "flex items-start gap-4 rounded-2xl border border-green/15 bg-bone p-5 transition-colors hover:border-green/40";
 
                 return (
                   <li key={label}>
@@ -106,18 +111,21 @@ export function Contact() {
                 Síguenos
               </span>
               <div className="flex items-center gap-3">
-                {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 text-ink-muted transition-colors hover:border-gold hover:text-gold"
-                  >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
+                {socialLinks.map(({ href, label, platform }) => {
+                  const Icon = SOCIAL_ICON_MAP[platform] ?? FacebookIcon;
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-green/25 text-ink-muted transition-colors hover:border-green hover:text-green"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
@@ -127,10 +135,10 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="min-w-0 overflow-hidden rounded-2xl border border-gold/30 shadow-[var(--shadow-gold)]"
+            className="min-w-0 overflow-hidden rounded-2xl border border-green/30 shadow-[var(--shadow-green)]"
           >
             <iframe
-              src={MAP_SRC}
+              src={settings.map_embed_src}
               title="Mapa de Santa Ana del Táchira"
               loading="lazy"
               className="block h-80 w-full max-w-full lg:h-full lg:min-h-[28rem]"

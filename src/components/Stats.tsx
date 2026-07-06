@@ -48,7 +48,7 @@ function StatNumber({ target, prefix = "" }: { target: number; prefix?: string }
   return (
     <span
       ref={ref}
-      className="font-display text-5xl leading-none text-gold lg:text-6xl"
+      className="font-display text-5xl leading-none text-green lg:text-6xl"
     >
       {prefix}
       {display}
@@ -61,13 +61,13 @@ export function Stats() {
     <section className="relative bg-carbon py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col items-center">
-          <span className="block h-px w-24 bg-gold/40" aria-hidden />
-          <p className="mt-4 text-center text-xs uppercase tracking-[0.32em] text-gold">
+          <span className="block h-px w-24 bg-green/40" aria-hidden />
+          <p className="mt-4 text-center text-xs uppercase tracking-[0.32em] text-green">
             El Colegio en cifras
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-gold/20">
+        <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-green/20">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}

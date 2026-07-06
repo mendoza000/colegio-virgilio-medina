@@ -25,12 +25,12 @@ type ButtonAsLink = CommonProps &
 type Props = ButtonAsButton | ButtonAsLink;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bone cursor-pointer";
+  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-bone cursor-pointer";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-gold text-carbon hover:bg-gold-light",
+  primary: "bg-green text-carbon hover:bg-green-light",
   outline:
-    "border border-gold text-gold bg-transparent hover:bg-gold hover:text-carbon",
+    "border border-green text-green bg-transparent hover:bg-green hover:text-carbon",
 };
 
 export function Button(props: Props) {

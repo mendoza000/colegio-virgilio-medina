@@ -1,5 +1,6 @@
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
-import { SOCIAL_LINKS } from "./icons/SocialIcons";
+import { SOCIAL_ICON_MAP, FacebookIcon } from "./icons/SocialIcons";
+import type { SiteSettings, SocialLink } from "../lib/content";
 
 const QUICK_LINKS = [
   { href: "#nosotros", label: "Nosotros" },
@@ -10,12 +11,17 @@ const QUICK_LINKS = [
   { href: "#contacto", label: "Contacto" },
 ];
 
-export function Footer() {
+type Props = {
+  settings: SiteSettings;
+  socialLinks: SocialLink[];
+};
+
+export function Footer({ settings, socialLinks }: Props) {
   return (
     <footer className="bg-carbon">
       <div
         aria-hidden
-        className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"
+        className="h-px bg-gradient-to-r from-transparent via-green/50 to-transparent"
       />
 
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
@@ -24,7 +30,7 @@ export function Footer() {
             <a href="#inicio" className="flex items-center gap-3" aria-label="Ir al inicio">
               <span className="inline-flex items-center justify-center overflow-hidden rounded-md bg-carbon">
                 <img
-                  src="https://placehold.co/120x120/0F0F0E/C9920A/png?text=CVM&font=playfair"
+                  src={settings.logo_url}
                   alt="Escudo del Colegio Virgilio Medina"
                   className="h-11 w-11"
                 />
@@ -38,13 +44,13 @@ export function Footer() {
               Santa Ana del Táchira, Venezuela. Una comunidad académica joven con
               valores firmes.
             </p>
-            <p className="font-display text-base italic text-gold">
-              &ldquo;Formando líderes con valores para el mundo&rdquo;
+            <p className="font-display text-base italic text-green">
+              &ldquo;{settings.slogan}&rdquo;
             </p>
           </div>
 
           <div className="flex flex-col gap-5 lg:col-span-3">
-            <h3 className="text-xs uppercase tracking-[0.32em] text-gold">
+            <h3 className="text-xs uppercase tracking-[0.32em] text-green">
               Navegación
             </h3>
             <ul className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-1 lg:grid-cols-1">
@@ -52,7 +58,7 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="font-medium text-bone/75 transition-colors hover:text-gold"
+                    className="font-medium text-bone/75 transition-colors hover:text-green"
                   >
                     {link.label}
                   </a>
@@ -62,65 +68,62 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-5 lg:col-span-4">
-            <h3 className="text-xs uppercase tracking-[0.32em] text-gold">
+            <h3 className="text-xs uppercase tracking-[0.32em] text-green">
               Contacto
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-start gap-3 text-bone/75">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
-                <span className="font-medium">
-                  Calle 14 entre carreras 8 y 9, N° 8-05,
-                  <br />
-                  Barrio Libertador, Santa Ana,
-                  <br />
-                  Mun. Córdoba, Edo. Táchira
-                </span>
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-green" aria-hidden />
+                <span className="font-medium">{settings.address}</span>
               </li>
               <li>
                 <a
-                  href="tel:+582767668102"
-                  className="flex items-center gap-3 font-medium text-bone/75 transition-colors hover:text-gold"
+                  href={`tel:+58${settings.phone.replace(/\D/g, "").replace(/^0/, "")}`}
+                  className="flex items-center gap-3 font-medium text-bone/75 transition-colors hover:text-green"
                 >
-                  <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  (0276) 766-8102
+                  <Phone className="h-4 w-4 shrink-0 text-green" aria-hidden />
+                  {settings.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:colegioprivadovirgiliomedinaramirez@gmail.com"
-                  className="flex items-start gap-3 font-medium text-bone/75 transition-colors hover:text-gold"
+                  href={`mailto:${settings.email}`}
+                  className="flex items-start gap-3 font-medium text-bone/75 transition-colors hover:text-green"
                 >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  <span className="break-all">colegioprivadovirgiliomedinaramirez@gmail.com</span>
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-green" aria-hidden />
+                  <span className="break-all">{settings.email}</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-gold/15 pt-8 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-green/15 pt-8 sm:flex-row">
           <p className="text-xs text-bone/55">
             © 2026 Colegio Virgilio Medina. Todos los derechos reservados.
           </p>
 
           <div className="flex items-center gap-3">
-            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 text-bone/70 transition-colors hover:border-gold hover:text-gold"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socialLinks.map(({ href, label, platform }) => {
+              const Icon = SOCIAL_ICON_MAP[platform] ?? FacebookIcon;
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-green/25 text-bone/70 transition-colors hover:border-green hover:text-green"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
           </div>
 
           <a
             href="#inicio"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-bone/60 transition-colors hover:text-gold"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-bone/60 transition-colors hover:text-green"
           >
             Volver arriba
             <ArrowUp className="h-3.5 w-3.5" aria-hidden />

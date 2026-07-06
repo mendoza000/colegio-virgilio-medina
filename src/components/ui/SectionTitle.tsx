@@ -24,7 +24,7 @@ export function SectionTitle({
 
   return (
     <div className={`flex flex-col gap-4 ${alignment} ${className}`.trim()}>
-      <Badge variant={variant === "dark" ? "gold" : "green"}>{label}</Badge>
+      <Badge variant={variant === "dark" ? "green" : "forest"}>{label}</Badge>
       <h2
         className={`font-display text-4xl md:text-5xl leading-tight tracking-tight ${titleColor}`}
       >

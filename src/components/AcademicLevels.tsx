@@ -1,67 +1,27 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Award,
-  Compass,
-  FlaskConical,
-  GraduationCap,
-  Smile,
-  Users,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import SectionTitle from "./ui/SectionTitle";
+import { resolveIcon } from "../lib/icons";
+import type { AcademicLevel, SectionHeading } from "../lib/content";
 
-type Feature = { Icon: LucideIcon; title: string };
-
-type Level = {
-  id: string;
-  label: string;
-  grades: string;
-  description: string;
-  features: [Feature, Feature, Feature];
-  image: string;
+type Props = {
+  heading: SectionHeading;
+  levels: AcademicLevel[];
 };
 
-const LEVELS: Level[] = [
-  {
-    id: "primaria",
-    label: "Primaria",
-    grades: "1° a 6° grado",
-    description:
-      "Formación de las bases con foco en lectoescritura, pensamiento lógico y valores. Acompañamiento cercano en cada paso del aprendizaje.",
-    features: [
-      { Icon: Users, title: "Grupos pequeños" },
-      { Icon: Award, title: "Docentes especializados" },
-      { Icon: Smile, title: "Ambientes lúdicos" },
-    ],
-    image: "https://picsum.photos/seed/cvm-primaria/800/600",
-  },
-  {
-    id: "bachillerato",
-    label: "Bachillerato",
-    grades: "1° a 5° año",
-    description:
-      "Profundización académica, formación científica y preparación universitaria. Espacios para laboratorio, lectura, orientación vocacional y proyecto de vida.",
-    features: [
-      { Icon: FlaskConical, title: "Laboratorios y club de lectura" },
-      { Icon: Compass, title: "Orientación vocacional" },
-      { Icon: GraduationCap, title: "Preuniversitario y proyecto de grado" },
-    ],
-    image: "https://picsum.photos/seed/cvm-bachillerato/800/600",
-  },
-];
-
-export function AcademicLevels() {
+export function AcademicLevels({ heading, levels }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const active = LEVELS[activeIndex];
+  const active = levels[activeIndex];
+
+  if (!active) return null;
 
   return (
     <section id="niveles" className="bg-bone py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionTitle
-          label="Oferta académica"
-          title="Dos etapas, un mismo propósito"
-          subtitle="Acompañamos a cada estudiante desde la lectoescritura hasta el proyecto de vida que lo prepara para la universidad."
+          label={heading.label}
+          title={heading.title}
+          subtitle={heading.subtitle ?? undefined}
           align="center"
           variant="light"
           className="mb-12"
@@ -72,7 +32,7 @@ export function AcademicLevels() {
           aria-label="Niveles académicos"
           className="mb-12 flex flex-wrap justify-center gap-2"
         >
-          {LEVELS.map((level, i) => {
+          {levels.map((level, i) => {
             const isActive = i === activeIndex;
             return (
               <button
@@ -92,7 +52,7 @@ export function AcademicLevels() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 ) : null}
-                <span className="relative">{level.label}</span>
+                <span className="relative">{level.name}</span>
               </button>
             );
           })}
@@ -108,29 +68,32 @@ export function AcademicLevels() {
             className="grid items-center gap-12 lg:grid-cols-2"
           >
             <div className="flex flex-col gap-6">
-              <p className="text-xs uppercase tracking-[0.32em] text-gold">
-                {active.label} · {active.grades}
+              <p className="text-xs uppercase tracking-[0.32em] text-green">
+                {active.name} · {active.grades}
               </p>
               <p className="text-base font-medium leading-relaxed text-ink/80 lg:text-lg">
                 {active.description}
               </p>
               <ul className="mt-2 flex flex-col gap-4">
-                {active.features.map(({ Icon, title }) => (
-                  <li key={title} className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 bg-bone">
-                      <Icon className="h-5 w-5 text-gold" aria-hidden />
-                    </span>
-                    <span className="font-display text-lg text-ink">{title}</span>
-                  </li>
-                ))}
+                {active.features.map(({ id, icon, title }) => {
+                  const Icon = resolveIcon(icon);
+                  return (
+                    <li key={id} className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-green/30 bg-bone">
+                        <Icon className="h-5 w-5 text-green" aria-hidden />
+                      </span>
+                      <span className="font-display text-lg text-ink">{title}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
             <div className="relative">
               <img
-                src={active.image}
-                alt={`Estudiantes de ${active.label} del Colegio Virgilio Medina`}
-                className="h-80 w-full rounded-2xl object-cover shadow-[var(--shadow-gold)] lg:h-[28rem]"
+                src={active.image_url}
+                alt={`Estudiantes de ${active.name} del Colegio Virgilio Medina`}
+                className="h-80 w-full rounded-2xl object-cover shadow-[var(--shadow-green)] lg:h-[28rem]"
               />
             </div>
           </motion.div>

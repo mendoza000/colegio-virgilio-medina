@@ -6,13 +6,14 @@
   --color-carbon: #0f0f0e;
   --color-carbon-soft: #1a1a18;
 
-  --color-gold: #c9920a;
-  --color-gold-light: #e8b84b;
+  --color-green: #43a047;
+  --color-green-light: #66bb6a;
 
   --color-forest: #2d5016;
   --color-forest-light: #4a7c2f;
 
   --color-berry: #8b1a1a;
+  --color-berry-light: #f87171;
 
   --color-ink: #1c1c1a;
   --color-ink-muted: #6b6560;
@@ -22,8 +23,8 @@
 }
 
 :root {
-  --shadow-gold: 0 4px 24px rgba(201, 146, 10, 0.12);
-  --border-gold-subtle: rgba(201, 146, 10, 0.3);
+  --shadow-green: 0 4px 24px rgba(67, 160, 71, 0.12);
+  --border-green-subtle: rgba(67, 160, 71, 0.3);
 }
 
 html {

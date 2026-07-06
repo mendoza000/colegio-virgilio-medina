@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type Variant = "green" | "gold";
+type Variant = "forest" | "green";
 
 interface Props {
   variant?: Variant;
@@ -12,11 +12,11 @@ const base =
   "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium tracking-wide font-body uppercase";
 
 const variants: Record<Variant, string> = {
-  green: "bg-forest/15 text-forest",
-  gold: "bg-gold/15 text-gold",
+  forest: "bg-forest/15 text-forest",
+  green: "bg-green/15 text-green",
 };
 
-export function Badge({ variant = "gold", children, className = "" }: Props) {
+export function Badge({ variant = "green", children, className = "" }: Props) {
   return (
     <span className={`${base} ${variants[variant]} ${className}`.trim()}>
       {children}
