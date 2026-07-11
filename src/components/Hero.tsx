@@ -68,9 +68,9 @@ export function Hero({ slogan }: Props) {
             variants={fadeUp}
             className="max-w-xl text-base leading-relaxed text-bone/75 md:text-lg"
           >
-            Formamos estudiantes desde primaria hasta bachillerato en Santa Ana del Táchira.
-            Una comunidad académica joven donde la disciplina, el rigor y los valores se viven
-            a diario.
+            Formamos estudiantes desde educación inicial hasta bachillerato en Santa Ana del
+            Táchira. Una comunidad académica joven donde la disciplina, el rigor y los valores
+            se viven a diario.
           </motion.p>
 
           <motion.p

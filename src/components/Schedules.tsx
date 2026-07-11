@@ -30,7 +30,7 @@ export function Schedules({ heading, rows, activities }: Props) {
                 Turno único
               </span>
               <h3 className="font-display text-3xl text-bone sm:text-4xl">
-                Primaria y bachillerato
+                Un horario, toda la comunidad
               </h3>
             </div>
             <span className="inline-flex items-center gap-2 rounded-full border border-green/30 px-3 py-1 text-xs uppercase tracking-wider text-bone/70">

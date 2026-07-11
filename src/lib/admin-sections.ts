@@ -45,7 +45,7 @@ export const SECTIONS: AdminSection[] = [
   {
     href: "/admin/academic-levels",
     label: "Niveles académicos",
-    description: "Primaria y Bachillerato: descripción y puntos destacados.",
+    description: "Agregá niveles y editá su descripción y puntos destacados.",
     icon: GraduationCap,
     ready: true,
   },

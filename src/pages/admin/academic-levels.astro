@@ -16,7 +16,7 @@ const levels = await getAcademicLevels();
     <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
       <AdminPageHeader
         title="Niveles académicos"
-        subtitle="Primaria y Bachillerato: descripción y puntos destacados de cada uno."
+        subtitle="Agregá, quitá o editá niveles académicos y sus puntos destacados."
       />
 
       <SingletonForm
@@ -35,6 +35,22 @@ const levels = await getAcademicLevels();
           title: headings.academic_levels?.title ?? "",
           subtitle: headings.academic_levels?.subtitle ?? "",
         }}
+      />
+
+      <ListEditor
+        client:load
+        title="Niveles académicos"
+        description="Agregá o quitá niveles. Cada nivel nuevo aparece abajo con su propio formulario."
+        icon="GraduationCap"
+        endpoint="/api/admin/lists/academic_levels"
+        fields={[
+          { key: "slug", label: "Slug (identificador único, ej. inicial)" },
+          { key: "name", label: "Nombre" },
+          { key: "grades", label: "Grados" },
+          { key: "description", label: "Descripción", type: "textarea" },
+        ]}
+        items={levels}
+        addLabel="Agregar nivel"
       />
 
       {levels.map((level) => (
