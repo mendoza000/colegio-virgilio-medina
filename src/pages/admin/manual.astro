@@ -1,0 +1,241 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminShell from "../../components/admin/AdminShell";
+import AdminPageHeader from "../../components/admin/AdminPageHeader.astro";
+import Button from "../../components/ui/Button";
+import { Download } from "lucide-react";
+---
+
+<Layout title="Manual de usuario — Admin C.V.M." description="Panel administrativo del Colegio Virgilio Medina.">
+  <AdminShell client:load active="/admin/manual">
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-10">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <AdminPageHeader
+          title="Manual de usuario"
+          subtitle="Guía para usar el panel de administración, sección por sección."
+        />
+        <Button
+          href="/Manual_Usuario_CVM.docx"
+          download="Manual_Usuario_CVM.docx"
+          className="w-fit shrink-0"
+        >
+          <Download className="h-4 w-4" />
+          Descargar manual (.docx)
+        </Button>
+      </div>
+
+      <section class="flex flex-col gap-3 rounded-xl border border-green/20 bg-green/5 p-5">
+        <h2 class="font-body text-lg font-bold text-ink">Cómo funciona (leer antes de empezar)</h2>
+        <ul class="flex flex-col gap-2 text-sm text-ink-muted">
+          <li>
+            <strong class="text-ink">Los cambios se ven de inmediato.</strong> Apenas guardás, ya queda publicado en la
+            página del colegio — no hace falta "publicar" nada aparte. Basta con recargar la página pública.
+          </li>
+          <li>
+            <strong class="text-ink">Eliminar es inmediato y no pide confirmación.</strong> Al hacer clic en el ícono
+            de basura de cualquier lista o foto, el elemento se borra al instante. Prestá atención antes de eliminar.
+          </li>
+          <li>
+            <strong class="text-ink">Reordenar</strong> se hace con las flechas ↑ y ↓ (solo se puede mover un elemento
+            con el de al lado, no hay arrastrar y soltar).
+          </li>
+          <li>
+            Cualquier cuenta con acceso al panel puede editar <strong class="text-ink">todo</strong> el contenido — no
+            hay roles ni permisos distintos.
+          </li>
+          <li>Para una cuenta nueva o recuperar una contraseña, pedilo a la persona encargada de la parte técnica.</li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">El menú del panel</h2>
+        <p class="text-sm text-ink-muted">El menú tiene estas secciones, en este orden:</p>
+        <ol class="list-decimal pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Galería</li>
+          <li>Datos generales, logo y contacto</li>
+          <li>Nosotros</li>
+          <li>Niveles académicos</li>
+          <li>El colegio en cifras</li>
+          <li>Materias</li>
+          <li>Horarios y extracurriculares</li>
+          <li>Inscripción</li>
+        </ol>
+        <p class="rounded-lg bg-bone p-3 text-sm text-ink-muted">
+          <strong class="text-ink">Importante:</strong> este orden del menú no es el mismo en que las secciones aparecen
+          en la página pública del colegio. Por ejemplo, "Galería" es la primera opción del menú, pero en la página
+          pública aparece casi al final. Buscá cada sección por su nombre, no por su posición.
+        </p>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">Tipos de formularios que vas a encontrar</h2>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>
+            <strong class="text-ink">Listas editables</strong> (Materias, Horarios, Valores, etc.): una tabla con
+            filas. Cada fila tiene botones para subir ↑, bajar ↓, editar (lápiz) y eliminar (basura). El botón
+            "Agregar…" abre una ventana con un formulario para cargar un elemento nuevo.
+          </li>
+          <li>
+            <strong class="text-ink">Formularios simples:</strong> una sola pantalla con campos de texto y un botón
+            "Guardar cambios". Al guardar aparece "Guardado." en verde; si algo falla, aparece un mensaje en rojo.
+          </li>
+        </ul>
+        <p class="text-sm text-ink-muted">
+          Casi todas las secciones también tienen, arriba de todo, un formulario simple para el
+          <strong class="text-ink">encabezado de la sección</strong> (Etiqueta, Título y Subtítulo) que se ve en la
+          página pública justo antes del contenido de esa sección.
+        </p>
+      </section>
+
+      <hr class="border-ink/10" />
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">1. Galería</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Galería</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Editá primero el encabezado de la sección, si hace falta.</li>
+          <li>
+            Para <strong class="text-ink">agregar una foto</strong>: "Subir foto", elegí el archivo, escribí una
+            descripción (opcional) y confirmá. Se sube automáticamente.
+          </li>
+          <li>
+            Para <strong class="text-ink">editar una foto existente</strong> solo podés cambiar la descripción — no se
+            puede reemplazar la imagen. Si querés otra foto, eliminá la entrada y subí una nueva.
+          </li>
+          <li>Reordená con las flechas ↑ y ↓.</li>
+          <li>Eliminar borra al instante, sin confirmación.</li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">2. Datos generales, logo y contacto</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Datos generales, logo y contacto</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li><strong class="text-ink">Logo:</strong> al subir uno nuevo, reemplaza al anterior automáticamente.</li>
+          <li><strong class="text-ink">Lema institucional:</strong> la frase de la portada de la página principal.</li>
+          <li>
+            <strong class="text-ink">Teléfono, correo, dirección y horario de atención:</strong> datos que aparecen en
+            Contacto.
+          </li>
+          <li><strong class="text-ink">URL del mapa:</strong> el enlace de inserción de OpenStreetMap.</li>
+          <li>
+            <strong class="text-ink">Redes sociales:</strong> lista editable con ícono de la plataforma, etiqueta y
+            enlace.
+          </li>
+          <li><strong class="text-ink">Encabezado de la sección Contacto.</strong></li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">3. Nosotros</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Nosotros</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Encabezado de la sección.</li>
+          <li>Misión y Visión (texto libre).</li>
+          <li>Imagen que acompaña la sección.</li>
+          <li>
+            <strong class="text-ink">Valores institucionales:</strong> lista editable con ícono, título y descripción.
+          </li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">4. Niveles académicos</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Niveles académicos</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Encabezado de la sección.</li>
+          <li>
+            Lista de niveles (Inicial, Primaria, Bachillerato...): agregá, reordená y eliminá niveles completos. Cada
+            nivel tiene identificador único (slug), nombre, grados y descripción.
+          </li>
+          <li>Para cada nivel, además: su imagen propia y sus puntos destacados (ícono + título).</li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">5. El colegio en cifras</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → El colegio en cifras</p>
+        <p class="text-sm text-ink-muted">
+          Lista editable de las cifras que se muestran como contador en la página pública. Para cada cifra: un prefijo
+          opcional (ej. "+"), el número y una descripción corta.
+        </p>
+        <p class="rounded-lg bg-bone p-3 text-sm text-ink-muted">
+          Esta es la única sección que <strong class="text-ink">no tiene</strong> encabezado editable — solo la lista
+          de cifras.
+        </p>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">6. Materias</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Materias</p>
+        <p class="text-sm text-ink-muted">
+          Encabezado de la sección y, debajo, una lista de materias separada por cada nivel académico. Agregá, editá,
+          reordená o eliminá materias dentro de la lista del nivel correspondiente.
+        </p>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">7. Horarios y extracurriculares</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Horarios y extracurriculares</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Encabezado de la sección.</li>
+          <li>
+            <strong class="text-ink">Jornada escolar:</strong> lista con ícono, etiqueta, horario y una nota opcional.
+          </li>
+          <li><strong class="text-ink">Actividades extracurriculares:</strong> nombre, día y horario.</li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">8. Inscripción</h2>
+        <p class="text-xs uppercase tracking-wide text-green">Menú → Inscripción</p>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>Encabezado de la sección.</li>
+          <li><strong class="text-ink">Año escolar:</strong> el texto del distintivo (ej. "Inscripciones 2026-2027").</li>
+          <li>
+            <strong class="text-ink">Formulario de inscripción (PDF):</strong> subí el archivo que los interesados van
+            a poder descargar. Si ya hay uno cargado, vas a ver "Ver documento actual" para revisarlo antes de
+            reemplazarlo. Al subir uno nuevo, reemplaza al anterior.
+          </li>
+          <li><strong class="text-ink">Pasos del proceso:</strong> lista con título y descripción de cada paso.</li>
+        </ul>
+      </section>
+
+      <hr class="border-ink/10" />
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">El selector de íconos</h2>
+        <p class="text-sm text-ink-muted">
+          En varios formularios (Valores, Jornada escolar, Puntos destacados, Redes sociales) vas a ver un botón que
+          muestra el ícono elegido. Al hacer clic se despliega una grilla con todos los íconos disponibles — hacé clic
+          en el que quieras usar y la grilla se cierra sola.
+        </p>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="font-body text-lg font-bold text-ink">Contenido que NO se edita desde el panel</h2>
+        <ul class="list-disc pl-5 text-sm text-ink-muted marker:text-green">
+          <li>
+            <strong class="text-ink">Testimonios:</strong> son fijos y no tienen pantalla de edición en este panel.
+          </li>
+          <li>
+            <strong class="text-ink">Portada (Hero):</strong> solo el "Lema institucional" (editable en Datos
+            generales) se refleja ahí; el resto es fijo.
+          </li>
+        </ul>
+      </section>
+
+      <section class="flex flex-col gap-3 rounded-xl border border-berry/20 bg-berry/5 p-5">
+        <h2 class="font-body text-lg font-bold text-ink">Precauciones al subir archivos</h2>
+        <ul class="flex flex-col gap-2 text-sm text-ink-muted">
+          <li>Para imágenes se aceptan los formatos habituales (JPG, PNG, WEBP, etc.); para inscripción solo PDF.</li>
+          <li>Si la subida falla o tarda mucho, probá con un archivo más liviano.</li>
+          <li>
+            Reemplazar una imagen o un PDF sobreescribe el archivo anterior: no queda un historial de versiones. Si no
+            estás seguro, guardá una copia del original en tu computadora antes de reemplazarlo.
+          </li>
+        </ul>
+      </section>
+    </div>
+  </AdminShell>
+</Layout>

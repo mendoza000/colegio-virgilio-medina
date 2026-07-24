@@ -4,6 +4,7 @@ import {
   CalendarClock,
   ClipboardList,
   GraduationCap,
+  HelpCircle,
   Image,
   Settings,
   TrendingUp,
@@ -75,6 +76,13 @@ export const SECTIONS: AdminSection[] = [
     label: "Inscripción",
     description: "Pasos del proceso y formulario descargable.",
     icon: ClipboardList,
+    ready: true,
+  },
+  {
+    href: "/admin/manual",
+    label: "Manual de usuario",
+    description: "Cómo usar cada sección del panel.",
+    icon: HelpCircle,
     ready: true,
   },
 ];
