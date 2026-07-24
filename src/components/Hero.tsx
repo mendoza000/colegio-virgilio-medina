@@ -46,7 +46,7 @@ export function Hero({ slogan }: Props) {
             className="inline-flex items-center gap-3 font-body text-xs uppercase tracking-[0.32em] text-green"
           >
             <span className="h-px w-10 bg-green" aria-hidden />
-            Colegio Virgilio Medina · Desde 2020
+            Colegio Virgilio Medina · Desde 2023
           </motion.span>
 
           <motion.h1

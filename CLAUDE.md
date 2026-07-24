@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Landing page + content admin panel for a fictional school (**Colegio Virgilio Medina**, C.V.M., primary → high school, located in Santa Ana del Táchira, Venezuela; founded 2020) built with **Astro (server output) + React islands + Tailwind v4 + Framer Motion + Supabase**. The public page is server-rendered on every request and reads its content from Supabase (see "Admin panel & Supabase" below); a single admin account can edit that content at `/admin`. All user-facing copy must be in **Venezuelan Spanish** with an institutional, professional tone.
+Landing page + content admin panel for a fictional school (**Colegio Virgilio Medina**, C.V.M., primary → high school, located in Santa Ana del Táchira, Venezuela; founded 2023) built with **Astro (server output) + React islands + Tailwind v4 + Framer Motion + Supabase**. The public page is server-rendered on every request and reads its content from Supabase (see "Admin panel & Supabase" below); a single admin account can edit that content at `/admin`. All user-facing copy must be in **Venezuelan Spanish** with an institutional, professional tone.
 
 The full content/animation/section spec lives in `docs/plan.md` and should be treated as the source of truth for what to build, what data to use, and what every section must contain. The plan is divided into 6 phases (Fundación → Pulido final); each phase has a deliverable and the project should compile cleanly between phases.
 

@@ -14,7 +14,7 @@ update site_settings set
 where id = 1;
 
 insert into section_headings (section_key, label, title, subtitle) values
-  ('about', 'Nuestra institución', 'Una comunidad educativa joven, sólida y con propósito', 'Desde 2020, en Santa Ana del Táchira, acompañamos a niñas, niños y jóvenes en su formación académica y humana.'),
+  ('about', 'Nuestra institución', 'Una comunidad educativa joven, sólida y con propósito', 'Desde 2023, en Santa Ana del Táchira, acompañamos a niñas, niños y jóvenes en su formación académica y humana.'),
   ('stats', 'El Colegio en cifras', '', null),
   ('academic_levels', 'Oferta académica', 'Dos etapas, un mismo propósito', 'Acompañamos a cada estudiante desde la lectoescritura hasta el proyecto de vida que lo prepara para la universidad.'),
   ('schedules', 'Jornada escolar', 'Horarios institucionales', 'Una rutina clara para primaria y bachillerato, con tiempos de descanso y atención a representantes.'),

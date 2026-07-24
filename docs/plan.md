@@ -108,7 +108,7 @@ Teléfonos:  (0276) 555-3478 | 0414 555 8290
 Email:      info@colegiovirgiliomedina.edu.ve
 TikTok:     https://www.tiktok.com/@u.e.colegio.virgi
 Secretaría: Lunes a Viernes, 7:00am – 4:00pm
-Fundación:  2020
+Fundación:  2023
 País:       Venezuela
 ```
 
@@ -286,7 +286,7 @@ Header de **dos pisos** con identidad institucional al estilo de un sitio univer
 - **Capa 2 — gradiente lateral:** `bg-gradient-to-r from-carbon via-carbon/85 to-carbon/40` (lectura segura del texto sobre la izquierda).
 - **Capa 3 — gradiente inferior:** banda inferior `bg-gradient-to-t from-carbon to-transparent` para fundir con la sección siguiente.
 - **Contenido (max-w-3xl):**
-  1. Kicker dorado en mayúsculas `tracking-[0.32em]` precedido de una raya dorada de 40px: "Colegio Virgilio Medina · Desde 2020".
+  1. Kicker dorado en mayúsculas `tracking-[0.32em]` precedido de una raya dorada de 40px: "Colegio Virgilio Medina · Desde 2023".
   2. `<h1>` `font-display text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-bone`: *"Educación con propósito, / **valores con carácter**"* (segunda línea en `text-gold`).
   3. Párrafo descriptivo `max-w-xl text-bone/75`.
   4. Lema en `font-display italic text-gold text-xl md:text-2xl`.

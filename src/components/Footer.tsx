@@ -40,7 +40,7 @@ export function Footer({ settings, socialLinks }: Props) {
               </span>
             </a>
             <p className="max-w-md text-sm font-medium leading-relaxed text-bone/70">
-              Desde 2020 formamos estudiantes desde educación inicial hasta bachillerato
+              Desde 2023 formamos estudiantes desde educación inicial hasta bachillerato
               en Santa Ana del Táchira, Venezuela. Una comunidad académica joven con
               valores firmes.
             </p>
